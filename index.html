@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>抓马工具 — 视频处理工具箱 · 海贼王特别版</title>
+<style>
+/* ═══════════════════════ CSS Variables ═══════════════════════ */
+:root {
+  --bg-deep: #060e1a;
+  --bg-main: #0a1628;
+  --bg-card: #0f1f38;
+  --bg-card2: #132844;
+  --gold: #e8a820;
+  --gold-dim: #c89030;
+  --red: #d44a3a;
+  --red-bright: #f05040;
+  --green: #3aac7a;
+  --blue: #4a90d9;
+  --orange: #f0a040;
+  --text: #e8e0d0;
+  --text-dim: #8898aa;
+  --text-muted: #5a6a7a;
+  --border: #1a3050;
+  --white: #f8f4f0;
+  scroll-behavior: smooth;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei UI", "PingFang SC", "Helvetica Neue", sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════ Hero ═══════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, #040c18 0%, #0a1a30 40%, #0d1f3c 70%, #0a1628 100%);
+  overflow: hidden;
+}
+
+/* Ocean waves */
+.ocean {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 180px;
+  overflow: hidden;
+}
+.wave {
+  position: absolute; bottom: 0; width: 200%; height: 100%;
+  background: repeat-x;
+  animation: waveMove linear infinite;
+}
+.wave1 {
+  background: radial-gradient(ellipse at center, rgba(58,172,122,0.18) 0%, transparent 70%);
+  background-size: 400px 60px;
+  background-position: 0 100%;
+  animation-duration: 7s;
+  height: 60px;
+  bottom: 0;
+}
+.wave2 {
+  background: radial-gradient(ellipse at center, rgba(74,144,217,0.15) 0%, transparent 70%);
+  background-size: 500px 80px;
+  background-position: 0 100%;
+  animation-duration: 11s;
+  height: 80px;
+  bottom: 10px;
+}
+.wave3 {
+  background: radial-gradient(ellipse at center, rgba(232,168,32,0.1) 0%, transparent 70%);
+  background-size: 350px 50px;
+  background-position: 0 100%;
+  animation-duration: 15s;
+  height: 50px;
+  bottom: 30px;
+}
+@keyframes waveMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Particles */
+.particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.1; }
+  100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Jolly Roger */
+.jolly-roger {
+  width: 100px; height: 120px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+.jolly-roger .skull {
+  width: 60px; height: 64px;
+  background: var(--white);
+  border-radius: 50% 50% 45% 45%;
+  position: absolute;
+  left: 50%; top: 10px; transform: translateX(-50%);
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.15);
+}
+.jolly-roger .jaw {
+  width: 48px; height: 28px;
+  background: var(--white);
+  position: absolute;
+  left: 50%; top: 58px; transform: translateX(-50%);
+  border-radius: 0 0 10px 10px;
+}
+.jolly-roger .eye { position: absolute; width: 12px; height: 14px; background: var(--bg-deep); border-radius: 50%; top: 28px; z-index: 2; }
+.jolly-roger .eye.left { left: 38px; }
+.jolly-roger .eye.right { right: 38px; }
+.jolly-roger .nose { position: absolute; width: 8px; height: 8px; background: var(--bg-deep); border-radius: 50%; left: 50%; top: 42px; transform: translateX(-50%); z-index: 2; }
+.jolly-roger .mouth {
+  position: absolute; left: 50%; top: 56px; transform: translateX(-50%);
+  width: 26px; height: 10px;
+  border-bottom: 2px solid var(--bg-deep);
+  border-radius: 0 0 14px 14px;
+  z-index: 2;
+}
+.jolly-roger .crossbones { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.jolly-roger .crossbones::before, .jolly-roger .crossbones::after {
+  content: ''; position: absolute;
+  width: 90px; height: 4px; background: var(--white);
+  border-radius: 2px;
+  top: 50px; left: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.jolly-roger .crossbones::before { transform: rotate(25deg); }
+.jolly-roger .crossbones::after { transform: rotate(-25deg); }
+.jolly-roger .crossbones .circle {
+  position: absolute; width: 16px; height: 16px;
+  border: 4px solid var(--white); border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+.jolly-roger .crossbones .circle.c1 { left: 0; top: 38px; }
+.jolly-roger .crossbones .circle.c2 { right: 0; top: 38px; }
+
+.hero h1 {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 6px;
+  text-shadow: 0 0 40px rgba(232,168,32,0.3);
+}
+.hero h1 .accent { color: var(--gold); }
+.hero .subtitle {
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--text-dim);
+  margin-top: 12px;
+  letter-spacing: 2px;
+}
+.hero .bounty-tag {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 6px 24px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+
+.hero-btns {
+  margin-top: 36px;
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  font-size: 16px; font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 20px rgba(212,74,58,0.4);
+}
+.btn-primary:hover {
+  background: var(--red-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212,74,58,0.6);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+}
+.btn-ghost:hover {
+  background: var(--gold);
+  color: var(--bg-deep);
+}
+
+.scroll-hint {
+  margin-top: 50px;
+  animation: bounce 2s infinite;
+}
+.scroll-hint span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.scroll-hint .arrow { font-size: 20px; color: var(--gold); }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+/* ═══════════════════════ Section Common ═══════════════════════ */
+.section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.section-title h2 {
+  font-size: clamp(24px, 4vw, 36px);
+  color: var(--white);
+  letter-spacing: 4px;
+  font-weight: 900;
+}
+.section-title .line {
+  width: 60px; height: 3px;
+  background: var(--gold);
+  margin: 16px auto 12px;
+}
+.section-title p {
+  color: var(--text-dim);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════ Features Grid ═══════════════════════ */
+#features { background: var(--bg-main); }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.bounty-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.4s;
+  position: relative;
+}
+.bounty-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.bounty-card .card-top {
+  padding: 28px 28px 0;
+  position: relative;
+}
+.bounty-card .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: block;
+}
+.bounty-card h3 {
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+.bounty-card .desc {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 40px;
+}
+.bounty-card .card-bottom {
+  margin-top: 16px;
+  padding: 12px 28px;
+  background: var(--bg-card2);
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid var(--border);
+}
+.bounty-card .bounty {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 14px;
+}
+.bounty-card .crew-stripe {
+  position: absolute; left: 0; top: 0; width: 4px; height: 100%;
+}
+.stripe-red { background: var(--red); }
+.stripe-green { background: var(--green); }
+.stripe-orange { background: var(--orange); }
+.stripe-blue { background: var(--blue); }
+.stripe-gold { background: var(--gold); }
+
+/* Wanted poster effect */
+.bounty-card::after {
+  content: 'WANTED';
+  position: absolute;
+  right: 16px; top: 16px;
+  font-family: Georgia, serif;
+  font-size: 10px;
+  color: rgba(212,74,58,0.15);
+  letter-spacing: 3px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* ═══════════════════════ Highlights ═══════════════════════ */
+#highlights {
+  background: var(--bg-deep);
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(232,168,32,0.03) 0%, transparent 60%);
+}
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  text-align: center;
+}
+.highlight-item .hl-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}
+.highlight-item h4 {
+  font-size: 17px;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+.highlight-item p {
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+/* ═══════════════════════ Download ═══════════════════════ */
+#download {
+  background: var(--bg-main);
+  text-align: center;
+}
+.download-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 50px 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.download-box .version {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.download-box .size-info {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.download-box .requirements {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  margin-top: 24px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.download-box .requirements span {
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.btn-download {
+  display: inline-block;
+  padding: 18px 50px;
+  font-size: 18px; font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+  font-family: inherit;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  box-shadow: 0 6px 30px rgba(212,74,58,0.5);
+}
+.btn-download:hover {
+  background: var(--red-bright);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(212,74,58,0.7);
+}
+.btn-download .dl-icon {
+  font-size: 22px;
+  margin-right: 8px;
+}
+
+/* ═══════════════════════ Footer ═══════════════════════ */
+footer {
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+footer .gold { color: var(--gold-dim); }
+
+/* ═══════════════════════ Scroll Reveal ═══════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════ Nav ═══════════════════════ */
+.top-nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  padding: 16px 30px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.3s;
+}
+.top-nav.scrolled {
+  background: rgba(6,14,26,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-dl {
+  background: var(--red);
+  color: #fff !important;
+  padding: 6px 16px;
+  border-radius: 3px;
+}
+
+/* ═══════════════════════ Mobile ═══════════════════════ */
+@media (max-width: 768px) {
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 11px; }
+  .nav-dl { padding: 4px 10px; }
+  .hero h1 { letter-spacing: 3px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .section { padding: 50px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="top-nav" id="nav">
+  <a href="#" class="nav-brand">☠ 抓马工具</a>
+  <ul class="nav-links">
+    <li><a href="#features">功能介绍</a></li>
+    <li><a href="#highlights">亮点</a></li>
+    <li><a href="#download" class="nav-dl">下载</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero" id="home">
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="jolly-roger">
+      <div class="skull"></div>
+      <div class="jaw"></div>
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="nose"></div>
+      <div class="mouth"></div>
+      <div class="crossbones">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+      </div>
+    </div>
+
+    <h1><span class="accent">抓马工具</span></h1>
+    <p class="subtitle">视频处理工具箱 · 海贼王特别版</p>
+    <div class="bounty-tag">WANTED — 悬赏金 30亿贝里</div>
+
+    <div class="hero-btns">
+      <a href="#download" class="btn btn-primary">⚓ 立即下载</a>
+      <a href="#features" class="btn btn-ghost">☠ 查看功能</a>
+    </div>
+
+    <div class="scroll-hint">
+      <span>向下滚动</span>
+      <div class="arrow">⌄</div>
+    </div>
+  </div>
+
+  <div class="ocean">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+</section>
+
+<!-- ── Features ── -->
+<section class="section" id="features">
+  <div class="section-title reveal">
+    <h2>悬 赏 令</h2>
+    <div class="line"></div>
+    <p>WANTED DEAD OR ALIVE — 五大去重利器</p>
+  </div>
+
+  <div class="features-grid">
+
+    <div class="bounty-card reveal">
+      <div class="crew-stripe stripe-red"></div>
+      <div class="card-top">
+        <span class="icon">☠</span>
+        <h3>视频转码去重</h3>
+        <p class="desc">重新编码改变视频内容指纹，生成全新文件指纹，有效应对平台查重机制。</p>
+      </div>
+      <div class="card-bottom">
+        <span>蒙奇·D·路飞</span>
+        <span class="bounty">悬赏金 8亿贝里</span>
+      </div>
+    </div>
+
+    <div class="bounty-card reveal">
+      <div class="crew-stripe stripe-green"></div>
+      <div class="card-top">
+        <span class="icon">⚔</span>
+        <h3>MD5 批量修改</h3>
+        <p class="desc">批量追加随机数据生成不同 MD5 副本，支持多文件同时处理，快速高效。</p>
+      </div>
+      <div class="card-bottom">
+        <span>罗罗诺亚·索隆</span>
+        <span class="bounty">悬赏金 6亿贝里</span>
+      </div>
+    </div>
+
+    <div class="bounty-card reveal">
+      <div class="crew-stripe stripe-gold"></div>
+      <div class="card-top">
+        <span class="icon">☁</span>
+        <h3>视频拼接去重</h3>
+        <p class="desc">多文件夹随机拼接 + 重编码，自动去重确保每个输出文件内容唯一。</p>
+      </div>
+      <div class="card-bottom">
+        <span>娜美</span>
+        <span class="bounty">悬赏金 7亿贝里</span>
+      </div>
+    </div>
+
+    <div class="bounty-card reveal">
+      <div class="crew-stripe stripe-blue"></div>
+      <div class="card-top">
+        <span class="icon">♨</span>
+        <h3>视频截取配对</h3>
+        <p class="desc">截取视频中段并两两配对组合，生成多样化片段，灵活配置截取参数。</p>
+      </div>
+      <div class="card-bottom">
+        <span>乌索普</span>
+        <span class="bounty">悬赏金 5亿贝里</span>
+      </div>
+    </div>
+
+    <div class="bounty-card reveal">
+      <div class="crew-stripe stripe-orange"></div>
+      <div class="card-top">
+        <span class="icon">★</span>
+        <h3>剪映自动导出</h3>
+        <p class="desc">基于屏幕颜色检测的剪映自动化导出工具，解放双手，批量操作无压力。</p>
+      </div>
+      <div class="card-bottom">
+        <span>山治</span>
+        <span class="bounty">悬赏金 4亿贝里</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Highlights ── -->
+<section class="section" id="highlights">
+  <div class="section-title reveal">
+    <h2>为什么选择抓马工具</h2>
+    <div class="line"></div>
+    <p>ONE PIECE EDITION</p>
+  </div>
+
+  <div class="highlights-grid">
+    <div class="highlight-item reveal">
+      <span class="hl-icon">🏴‍☠️</span>
+      <h4>海贼王主题 UI</h4>
+      <p>路飞、索隆经典角色画像，沉浸式草帽海贼团视觉体验。</p>
+    </div>
+    <div class="highlight-item reveal">
+      <span class="hl-icon">⚡</span>
+      <h4>一键安装</h4>
+      <p>双击安装，自动创建桌面快捷方式和开始菜单，无需复杂配置。</p>
+    </div>
+    <div class="highlight-item reveal">
+      <span class="hl-icon">🔐</span>
+      <h4>会员激活系统</h4>
+      <p>3 次免费试用，会员码永久激活，一次激活终身使用。</p>
+    </div>
+    <div class="highlight-item reveal">
+      <span class="hl-icon">🧰</span>
+      <h4>5 合 1 工具箱</h4>
+      <p>五大视频处理工具集成一体，免去安装多个软件的麻烦。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Download ── -->
+<section class="section" id="download">
+  <div class="section-title reveal">
+    <h2>下 载</h2>
+    <div class="line"></div>
+    <p>SET SAIL — 开启你的视频去重之旅</p>
+  </div>
+
+  <div class="download-box reveal">
+    <div class="jolly-roger" style="transform:scale(0.5);margin-bottom:10px;">
+      <div class="skull"></div><div class="jaw"></div>
+      <div class="eye left"></div><div class="eye right"></div>
+      <div class="nose"></div><div class="mouth"></div>
+      <div class="crossbones"><div class="circle c1"></div><div class="circle c2"></div></div>
+    </div>
+
+    <p class="version">抓马工具 v1.0 — 海贼王特别版</p>
+    <p class="size-info">文件大小约 95MB · Windows 10/11 · 64位</p>
+
+    <a href="抓马工具_发布包.zip" class="btn-download" download>
+      <span class="dl-icon">⬇</span> 立即下载
+    </a>
+
+    <div class="requirements">
+      <span>Windows 10/11</span>
+      <span>64-bit</span>
+      <span>无需安装其他依赖</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>© 2024 <span class="gold">抓马工具</span> — ONE PIECE EDITION</p>
+  <p style="margin-top:6px;">想要我的财宝吗？那就去找吧！我把一切都放在那里了。</p>
+</footer>
+
+<script>
+/* ═══════════════════════ Particles ═══════════════════════ */
+(function(){
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 3 + 1;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = -(Math.random() * 40) + 'px';
+    p.style.animationDuration = (Math.random() * 8 + 8) + 's';
+    p.style.animationDelay = (Math.random() * 8) + 's';
+    if (Math.random() > 0.5) p.style.background = '#e8a820';
+    else if (Math.random() > 0.5) p.style.background = '#d44a3a';
+    else p.style.background = '#4a90d9';
+    container.appendChild(p);
+  }
+})();
+
+/* ═══════════════════════ Nav scroll ═══════════════════════ */
+window.addEventListener('scroll', function(){
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+/* ═══════════════════════ Scroll Reveal ═══════════════════════ */
+(function(){
+  const observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(function(el){
+    observer.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
