@@ -7,10 +7,10 @@
 <style>
 /* ═══════════════════════ Variables ═══════════════════════ */
 :root {
-  --bg-deep:#dce8f4;--bg-main:#e4eef8;--bg-card:#ecf4fc;--bg-card2:#f4f8fd;
-  --gold:#e89820;--gold-dim:#c88020;--red:#d44a3a;--red-bright:#f05040;
-  --green:#2e9a6a;--blue:#3a80d0;--orange:#e89030;
-  --text:#1a2a3a;--text-dim:#405870;--text-muted:#7088a0;--border:#c8d8e8;--white:#fff;
+  --bg-deep:#060e1a;--bg-main:#0a1628;--bg-card:#0f1f38;--bg-card2:#132844;
+  --gold:#e8a820;--gold-dim:#c89030;--red:#d44a3a;--red-bright:#f05040;
+  --green:#3aac7a;--blue:#4a90d9;--orange:#f0a040;
+  --text:#e8e0d0;--text-dim:#8898aa;--text-muted:#5a6a7a;--border:#1a3050;--white:#f8f4f0;
   scroll-behavior:smooth;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -18,7 +18,7 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 
 /* ═══════════════════════ Nav ═══════════════════════ */
 .top-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:14px 30px;display:flex;align-items:center;justify-content:space-between;transition:all .4s;}
-.top-nav.scrolled{background:rgba(220,232,244,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.top-nav.scrolled{background:rgba(6,14,26,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 4px 30px rgba(0,0,0,.5);}
 .nav-brand{font-size:20px;font-weight:900;color:var(--gold);letter-spacing:3px;text-decoration:none;}
 .nav-links{display:flex;gap:24px;list-style:none;align-items:center;}
 .nav-links a{color:var(--text-dim);text-decoration:none;font-size:13px;letter-spacing:1px;transition:color .3s;position:relative;}
@@ -40,14 +40,14 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 .sound-toggle.on{border-color:var(--green);color:var(--green);}
 
 /* ═══════════════════════ Hero ═══════════════════════ */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#c8ddf0 0%,#d8e8f6 30%,#e0ecf8 55%,#d4e4f4 75%,#c8ddf0 100%);overflow:hidden;}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#020810 0%,#061428 30%,#0a1e3c 55%,#0d2448 75%,#0a1628 100%);overflow:hidden;}
 .hero-bg-stars,.sec-ptcls{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:1;}
 .ptcl{position:absolute;border-radius:50%;animation:ptclFloat linear infinite;opacity:0;}
-.ptcl.gold{background:var(--gold);box-shadow:0 0 8px rgba(232,168,32,.6);}
-.ptcl.red{background:var(--red);box-shadow:0 0 8px rgba(212,74,58,.5);}
-.ptcl.white{background:#fff;box-shadow:0 0 6px rgba(255,255,255,.5);}
-.ptcl.blue{background:var(--blue);box-shadow:0 0 6px rgba(74,144,217,.5);}
-.ptcl.green{background:var(--green);box-shadow:0 0 6px rgba(58,172,122,.5);}
+.ptcl.gold{background:var(--gold);box-shadow:0 0 14px rgba(232,168,32,.8);}
+.ptcl.red{background:var(--red);box-shadow:0 0 14px rgba(212,74,58,.7);}
+.ptcl.white{background:#fff;box-shadow:0 0 12px rgba(255,255,255,.7);}
+.ptcl.blue{background:var(--blue);box-shadow:0 0 12px rgba(74,144,217,.7);}
+.ptcl.green{background:var(--green);box-shadow:0 0 12px rgba(58,172,122,.7);}
 @keyframes ptclFloat{0%{transform:translateY(0) translateX(0) scale(0);opacity:0}4%{opacity:1}12%{opacity:.9}80%{opacity:.15}100%{transform:translateY(-110vh) translateX(var(--drift)) scale(var(--endS));opacity:0}}
 .lightning{position:absolute;top:0;width:2px;background:linear-gradient(to bottom,rgba(255,255,255,.9),rgba(232,168,32,.6),transparent);animation:lflash linear infinite;opacity:0;pointer-events:none;}
 @keyframes lflash{0%,90%,94%,100%{opacity:0}91%,93%{opacity:.7}92%{opacity:1}}
@@ -113,7 +113,7 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 #features{background:var(--bg-deep);}
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:28px;perspective:1200px;}
 .bounty-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;overflow:visible;transition:box-shadow .4s,border-color .4s;position:relative;cursor:default;transform-style:preserve-3d;}
-.bounty-card:hover{border-color:var(--gold);box-shadow:0 20px 60px rgba(0,0,0,.1);z-index:10;}
+.bounty-card:hover{border-color:var(--gold);box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:10;}
 .bounty-card .card-inner{transition:transform .15s ease-out;border-radius:10px;overflow:hidden;position:relative;}
 .bounty-card .card-top{padding:24px 24px 0;position:relative;text-align:center;}
 
@@ -131,7 +131,7 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 .stripe-red{background:var(--red);}.stripe-green{background:var(--green);}.stripe-orange{background:var(--orange);}.stripe-blue{background:var(--blue);}.stripe-gold{background:var(--gold);}
 
 /* Card tutorial */
-.card-tutorial{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .5s ease;background:rgba(200,216,232,.3);}
+.card-tutorial{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .5s ease;background:rgba(0,0,0,.2);}
 .bounty-card.expanded .card-tutorial{max-height:260px;padding:16px 24px;border-top:1px solid var(--border);}
 .card-tutorial h5{font-size:12px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:8px;}
 .card-tutorial ol{font-size:12px;color:var(--text-dim);padding-left:18px;line-height:2;}
@@ -145,7 +145,7 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 .glow-cursor{position:fixed;pointer-events:none;z-index:9999;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,32,.08) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .3s;opacity:0;}
 
 /* ═══════════════════════ Highlights ═══════════════════════ */
-#highlights{background:var(--bg-main);background-image:radial-gradient(ellipse at 50% 0%,rgba(58,128,208,.06) 0%,transparent 60%);}
+#highlights{background:var(--bg-main);background-image:radial-gradient(ellipse at 50% 0%,rgba(232,168,32,.04) 0%,transparent 60%);}
 .highlights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px;text-align:center;}
 .highlight-item .hl-icon{font-size:52px;display:block;margin-bottom:16px;transition:transform .3s;}
 .highlight-item:hover .hl-icon{transform:scale(1.15) rotate(-5deg);}
@@ -209,7 +209,7 @@ footer .gold{color:var(--gold-dim);}
 /* ═══════════════════════ Mobile ═══════════════════════ */
 @media(max-width:768px){
   .top-nav{padding:12px 16px;}
-  .nav-links{position:fixed;top:0;right:-100%;width:70%;max-width:280px;height:100vh;background:rgba(220,232,244,.98);backdrop-filter:blur(15px);flex-direction:column;gap:0;padding:80px 30px 30px;transition:right .4s ease;border-left:1px solid var(--border);}
+  .nav-links{position:fixed;top:0;right:-100%;width:70%;max-width:280px;height:100vh;background:rgba(6,14,26,.98);backdrop-filter:blur(15px);flex-direction:column;gap:0;padding:80px 30px 30px;transition:right .4s ease;border-left:1px solid var(--border);}
   .nav-links.open{right:0;}
   .nav-links a{font-size:15px;padding:14px 0;border-bottom:1px solid var(--border);display:block;}
   .nav-dl{text-align:center;margin-top:12px;border-bottom:none;}
@@ -642,7 +642,7 @@ footer .gold{color:var(--gold-dim);}
       const p = document.createElement('div');
       const t = types[Math.floor(Math.random() * types.length)];
       p.className = 'ptcl ' + t;
-      const size = Math.random() * 5 + 2;
+      const size = Math.random() * 12 + 4;
       p.style.cssText =
         'left:' + Math.random() * 100 + '%;' +
         'top:' + (Math.random() * 100 + 5) + '%;' +
@@ -656,7 +656,7 @@ footer .gold{color:var(--gold-dim);}
   }
 
   // Hero — heavy particle storm
-  spawnParticles(document.getElementById('stars'), 180, ['gold','gold','gold','red','white','white','blue']);
+  spawnParticles(document.getElementById('stars'), 120, ['gold','gold','gold','red','white','white','blue']);
 
   // Story section
   spawnParticles(document.getElementById('ptcl-story'), 50, ['gold','white','blue']);
