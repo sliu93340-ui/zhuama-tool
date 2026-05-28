@@ -186,21 +186,6 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 @keyframes dlProgress{0%{width:0}30%{width:45%}60%{width:72%}100%{width:100%}}
 
 /* ═══════════════════════ Changelog ═══════════════════════ */
-#changelog{background:var(--bg-deep);}
-.timeline{max-width:600px;margin:0 auto;position:relative;padding-left:40px;}
-.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--border));border-radius:1px;}
-.tl-item{position:relative;margin-bottom:32px;}
-.tl-item:last-child{margin-bottom:0;}
-.tl-dot{position:absolute;left:-32px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(232,168,32,.4);}
-.tl-item:last-child .tl-dot{background:var(--red);box-shadow:0 0 10px rgba(212,74,58,.4);}
-.tl-version{font-size:12px;color:var(--gold);letter-spacing:2px;margin-bottom:2px;}
-.tl-item:last-child .tl-version{color:var(--red-bright);}
-.tl-date{font-size:11px;color:var(--text-muted);margin-bottom:6px;}
-.tl-body{font-size:13px;color:var(--text-dim);line-height:1.7;}
-.tl-body ul{padding-left:16px;}
-.tl-body ul li{margin-bottom:2px;}
-.tl-body ul li::marker{color:var(--gold-dim);}
-
 /* ═══════════════════════ Footer ═══════════════════════ */
 footer{background:var(--bg-deep);border-top:1px solid var(--border);text-align:center;padding:40px 20px;color:var(--text-muted);font-size:12px;letter-spacing:1px;}
 footer .gold{color:var(--gold-dim);}
@@ -233,9 +218,7 @@ footer .gold{color:var(--gold-dim);}
   .hero h1{font-size:28px;letter-spacing:2px;}
   .btn{padding:12px 28px;font-size:14px;}
   .btn-download{padding:16px 35px;font-size:15px;}
-  .timeline{padding-left:30px;}
-  .timeline::before{left:10px;}
-  .tl-dot{left:-24px;width:10px;height:10px;}
+
   .hero-luffy{width:100px;height:100px;}
 }
 </style>
@@ -252,7 +235,6 @@ footer .gold{color:var(--gold-dim);}
     <li><a href="#story">航海日志</a></li>
     <li><a href="#features">悬赏令</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#changelog">更新日志</a></li>
     <li><a href="#download" class="nav-dl">⬇ 下载</a></li>
   </ul>
 </nav>
@@ -619,15 +601,6 @@ footer .gold{color:var(--gold-dim);}
     <a href="ZhuamaTool_v2.0.zip" class="btn-download" id="dlBtn" download><span class="dl-icon">⬇</span> 立即下载</a>
     <div class="download-progress" id="dlProgress"><div class="bar"></div></div>
     <div class="requirements"><span>Windows 10/11</span><span>64-bit</span><span>无需安装其他依赖</span><span>3次免费试用</span></div>
-  </div>
-</section>
-
-<!-- ══ Changelog ══ -->
-<section class="section" id="changelog">
-  <div class="section-title reveal"><h2>更 新 日 志</h2><div class="line"></div><p>GRAND LINE LOG — 伟大的航路记录</p></div>
-  <div class="timeline">
-    <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-version">v2.0 — 2026.05</div><div class="tl-date">悬赏金 30亿贝里</div><div class="tl-body"><ul><li>SVG 动画角色形象全新上线</li><li>新增会员激活系统（3次试用 + 激活码）</li><li>修复滚动和界面显示问题</li><li>网站全面升级至顶配版</li></ul></div></div>
-    <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-version">v1.0 — 2024.10</div><div class="tl-date">悬赏金 15亿贝里</div><div class="tl-body"><ul><li>五大视频处理工具集成发布</li><li>海贼王主题 UI 界面</li><li>支持视频转码、MD5修改、拼接、截取、导出</li></ul></div></div>
   </div>
 </section>
 
