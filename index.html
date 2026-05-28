@@ -88,14 +88,15 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 
 /* ═══════════════════════ Section Common ═══════════════════════ */
 .section{padding:90px 20px;max-width:1100px;margin:0 auto;}
-.section-title{text-align:center;margin-bottom:60px;}
+.section-title{text-align:center;margin-bottom:60px;position:relative;z-index:1;}
 .section-title h2{font-size:clamp(26px,4vw,38px);color:var(--white);letter-spacing:4px;font-weight:900;}
 .section-title .line{width:60px;height:3px;background:var(--gold);margin:16px auto 12px;}
 .section-title p{color:var(--text-dim);font-size:14px;letter-spacing:1px;}
 
 /* ═══════════════════════ Story Timeline ═══════════════════════ */
 #story{background:var(--bg-main);position:relative;}
-.story-wrapper{position:relative;padding-left:60px;}
+#story::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('img/【哲风壁纸】五档尼卡-动漫对决.png') center/cover no-repeat;opacity:.12;z-index:0;pointer-events:none;}
+.story-wrapper{position:relative;padding-left:60px;z-index:1;}
 .story-line{position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--red),var(--blue),var(--green),var(--gold-dim));border-radius:1px;}
 .story-ship{position:absolute;left:15px;font-size:28px;transition:top .15s linear;z-index:10;pointer-events:none;filter:drop-shadow(0 0 6px rgba(232,168,32,.5));}
 .story-item{position:relative;margin-bottom:50px;padding-left:0;}
@@ -145,7 +146,8 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 .glow-cursor{position:fixed;pointer-events:none;z-index:9999;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,32,.08) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .3s;opacity:0;}
 
 /* ═══════════════════════ Highlights ═══════════════════════ */
-#highlights{background:var(--bg-main);background-image:radial-gradient(ellipse at 50% 0%,rgba(232,168,32,.04) 0%,transparent 60%);}
+#highlights{background:var(--bg-main);background-image:radial-gradient(ellipse at 50% 0%,rgba(232,168,32,.04) 0%,transparent 60%);position:relative;}
+#highlights::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('img/【哲风壁纸】乌索普-乔巴-娜美.png') center/cover no-repeat;opacity:.1;z-index:0;pointer-events:none;}
 .highlights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px;text-align:center;}
 .highlight-item .hl-icon{font-size:52px;display:block;margin-bottom:16px;transition:transform .3s;}
 .highlight-item:hover .hl-icon{transform:scale(1.15) rotate(-5deg);}
@@ -154,7 +156,7 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 
 /* ═══════════════════════ FAQ ═══════════════════════ */
 #faq{background:var(--bg-deep);}
-.faq-list{max-width:700px;margin:0 auto;}
+.faq-list{max-width:700px;margin:0 auto;position:relative;z-index:1;}
 .faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px;overflow:hidden;transition:border-color .3s;}
 .faq-item:hover{border-color:var(--gold);}
 .faq-q{width:100%;padding:18px 22px;background:none;border:none;color:var(--text);font-size:15px;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:inherit;letter-spacing:1px;transition:color .3s;}
@@ -166,8 +168,9 @@ body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;
 .faq-a-inner{padding:0 22px 18px;color:var(--text-dim);font-size:13px;line-height:1.8;}
 
 /* ═══════════════════════ Download ═══════════════════════ */
-#download{background:var(--bg-main);text-align:center;}
-.download-box{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:50px 30px;max-width:620px;margin:0 auto;transition:border-color .4s,box-shadow .4s;}
+#download{background:var(--bg-main);text-align:center;position:relative;}
+#download::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('img/【哲风壁纸】字母图案-海贼王.png') center/cover no-repeat;opacity:.1;z-index:0;pointer-events:none;}
+.download-box{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:50px 30px;max-width:620px;margin:0 auto;transition:border-color .4s,box-shadow .4s;position:relative;z-index:1;}
 .download-box:hover{border-color:var(--gold);box-shadow:0 0 50px rgba(232,168,32,.1);}
 .download-box .version{color:var(--text-dim);font-size:14px;margin-bottom:6px;}
 .download-box .size-info{color:var(--text-muted);font-size:13px;margin-bottom:24px;}
