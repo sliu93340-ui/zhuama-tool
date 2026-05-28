@@ -5,257 +5,241 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>抓马工具 — 视频处理工具箱 · 海贼王特别版 v2.0</title>
 <style>
-/* ═══════════════════════ CSS Variables ═══════════════════════ */
+/* ═══════════════════════ Variables ═══════════════════════ */
 :root {
-  --bg-deep: #060e1a; --bg-main: #0a1628; --bg-card: #0f1f38; --bg-card2: #132844;
-  --gold: #e8a820; --gold-dim: #c89030; --red: #d44a3a; --red-bright: #f05040;
-  --green: #3aac7a; --blue: #4a90d9; --orange: #f0a040;
-  --text: #e8e0d0; --text-dim: #8898aa; --text-muted: #5a6a7a; --border: #1a3050; --white: #f8f4f0;
-  scroll-behavior: smooth;
+  --bg-deep:#060e1a;--bg-main:#0a1628;--bg-card:#0f1f38;--bg-card2:#132844;
+  --gold:#e8a820;--gold-dim:#c89030;--red:#d44a3a;--red-bright:#f05040;
+  --green:#3aac7a;--blue:#4a90d9;--orange:#f0a040;
+  --text:#e8e0d0;--text-dim:#8898aa;--text-muted:#5a6a7a;--border:#1a3050;--white:#f8f4f0;
+  scroll-behavior:smooth;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: "Microsoft YaHei UI", "PingFang SC", "Helvetica Neue", sans-serif; background: var(--bg-deep); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Microsoft YaHei UI","PingFang SC","Helvetica Neue",sans-serif;background:var(--bg-deep);color:var(--text);overflow-x:hidden;line-height:1.6;}
 
 /* ═══════════════════════ Nav ═══════════════════════ */
-.top-nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 14px 30px; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s; }
-.top-nav.scrolled { background: rgba(6,14,26,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
-.nav-brand { font-size: 20px; font-weight: 900; color: var(--gold); letter-spacing: 3px; text-decoration: none; transition: color 0.3s; }
-.nav-brand:hover { color: #fff; }
-.nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
-.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: color 0.3s; position: relative; }
-.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%) scaleX(0); width: 100%; height: 1px; background: var(--gold); transition: transform 0.3s; }
-.nav-links a:hover { color: var(--gold); }
-.nav-links a:hover::after { transform: translateX(-50%) scaleX(1); }
-.nav-dl { background: var(--red); color: #fff !important; padding: 7px 18px; border-radius: 4px; transition: all 0.3s; }
-.nav-dl:hover { background: var(--red-bright); transform: translateY(-1px); box-shadow: 0 4px 15px rgba(212,74,58,0.4); }
-.nav-dl::after { display: none; }
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; z-index: 1001; }
-.hamburger span { display: block; width: 26px; height: 2px; background: var(--gold); transition: all 0.3s; border-radius: 2px; }
-.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+.top-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:14px 30px;display:flex;align-items:center;justify-content:space-between;transition:all .4s;}
+.top-nav.scrolled{background:rgba(6,14,26,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 4px 30px rgba(0,0,0,.5);}
+.nav-brand{font-size:20px;font-weight:900;color:var(--gold);letter-spacing:3px;text-decoration:none;}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:13px;letter-spacing:1px;transition:color .3s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%) scaleX(0);width:100%;height:1px;background:var(--gold);transition:transform .3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{transform:translateX(-50%) scaleX(1);}
+.nav-dl{background:var(--red);color:#fff!important;padding:7px 18px;border-radius:4px;}
+.nav-dl:hover{background:var(--red-bright);transform:translateY(-1px);box-shadow:0 4px 15px rgba(212,74,58,.4);}
+.nav-dl::after{display:none;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px;z-index:1001;}
+.hamburger span{display:block;width:26px;height:2px;background:var(--gold);transition:all .3s;border-radius:2px;}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 
 /* ═══════════════════════ Sound Toggle ═══════════════════════ */
-.sound-toggle { position: fixed; bottom: 24px; right: 24px; z-index: 999; width: 44px; height: 44px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-dim); font-size: 18px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
-.sound-toggle:hover { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 20px rgba(232,168,32,0.2); }
-.sound-toggle.on { border-color: var(--green); color: var(--green); }
+.sound-toggle{position:fixed;bottom:24px;right:24px;z-index:999;width:44px;height:44px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);color:var(--text-dim);font-size:18px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;}
+.sound-toggle:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 20px rgba(232,168,32,.2);}
+.sound-toggle.on{border-color:var(--green);color:var(--green);}
 
 /* ═══════════════════════ Hero ═══════════════════════ */
-.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #020810 0%, #061428 30%, #0a1e3c 55%, #0d2448 75%, #0a1628 100%); overflow: hidden; }
-.hero-bg-stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-.star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle linear infinite; }
-@keyframes twinkle { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
-.lightning { position: absolute; top: 0; width: 2px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(232,168,32,0.6), transparent); animation: lightningFlash linear infinite; opacity: 0; pointer-events: none; }
-@keyframes lightningFlash { 0%,90%,94%,100% { opacity: 0; } 91%,93% { opacity: 0.7; } 92% { opacity: 1; } }
-.moon { position: absolute; top: 8%; right: 12%; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #fffbe6, #e8c840); box-shadow: 0 0 60px rgba(232,200,64,0.4), 0 0 120px rgba(232,200,64,0.15); animation: moonGlow 4s ease-in-out infinite; pointer-events: none; }
-@keyframes moonGlow { 0%,100% { box-shadow: 0 0 60px rgba(232,200,64,0.4), 0 0 120px rgba(232,200,64,0.15); } 50% { box-shadow: 0 0 80px rgba(232,200,64,0.6), 0 0 160px rgba(232,200,64,0.25); } }
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#020810 0%,#061428 30%,#0a1e3c 55%,#0d2448 75%,#0a1628 100%);overflow:hidden;}
+.hero-bg-stars{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle linear infinite;}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+.lightning{position:absolute;top:0;width:2px;background:linear-gradient(to bottom,rgba(255,255,255,.9),rgba(232,168,32,.6),transparent);animation:lflash linear infinite;opacity:0;pointer-events:none;}
+@keyframes lflash{0%,90%,94%,100%{opacity:0}91%,93%{opacity:.7}92%{opacity:1}}
+.moon{position:absolute;top:8%;right:12%;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fffbe6,#e8c840);box-shadow:0 0 60px rgba(232,200,64,.4),0 0 120px rgba(232,200,64,.15);animation:moonGlow 4s ease-in-out infinite;pointer-events:none;}
+@keyframes moonGlow{0%,100%{box-shadow:0 0 60px rgba(232,200,64,.4),0 0 120px rgba(232,200,64,.15)}50%{box-shadow:0 0 80px rgba(232,200,64,.6),0 0 160px rgba(232,200,64,.25)}}
+.ocean{position:absolute;bottom:0;left:0;width:100%;height:200px;overflow:hidden;}
+.wave{position:absolute;bottom:0;width:200%;height:100%;background:repeat-x;animation:waveMove linear infinite;}
+.wave1{background:radial-gradient(ellipse at center,rgba(58,172,122,.2) 0%,transparent 70%);background-size:500px 70px;background-position:0 100%;animation-duration:6s;height:70px;bottom:0;}
+.wave2{background:radial-gradient(ellipse at center,rgba(74,144,217,.18) 0%,transparent 70%);background-size:600px 90px;background-position:0 100%;animation-duration:10s;height:90px;bottom:15px;}
+.wave3{background:radial-gradient(ellipse at center,rgba(232,168,32,.12) 0%,transparent 70%);background-size:400px 55px;background-position:0 100%;animation-duration:14s;height:55px;bottom:35px;}
+.wave4{background:radial-gradient(ellipse at center,rgba(74,144,217,.1) 0%,transparent 70%);background-size:700px 100px;background-position:0 100%;animation-duration:18s;height:100px;bottom:55px;}
+@keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ship{position:absolute;bottom:170px;left:-200px;font-size:60px;animation:sail 22s linear infinite;z-index:5;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5));}
+@keyframes sail{0%{left:-200px;transform:translateY(0) rotate(-2deg)}25%{transform:translateY(-18px) rotate(1deg)}50%{transform:translateY(0) rotate(-1deg)}75%{transform:translateY(-12px) rotate(2deg)}100%{left:110%;transform:translateY(0) rotate(-2deg)}}
 
-.ocean { position: absolute; bottom: 0; left: 0; width: 100%; height: 200px; overflow: hidden; }
-.wave { position: absolute; bottom: 0; width: 200%; height: 100%; background: repeat-x; animation: waveMove linear infinite; }
-.wave1 { background: radial-gradient(ellipse at center, rgba(58,172,122,0.2) 0%, transparent 70%); background-size: 500px 70px; background-position: 0 100%; animation-duration: 6s; height: 70px; bottom: 0; }
-.wave2 { background: radial-gradient(ellipse at center, rgba(74,144,217,0.18) 0%, transparent 70%); background-size: 600px 90px; background-position: 0 100%; animation-duration: 10s; height: 90px; bottom: 15px; }
-.wave3 { background: radial-gradient(ellipse at center, rgba(232,168,32,0.12) 0%, transparent 70%); background-size: 400px 55px; background-position: 0 100%; animation-duration: 14s; height: 55px; bottom: 35px; }
-.wave4 { background: radial-gradient(ellipse at center, rgba(74,144,217,0.1) 0%, transparent 70%); background-size: 700px 100px; background-position: 0 100%; animation-duration: 18s; height: 100px; bottom: 55px; }
-@keyframes waveMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* Hero Luffy SVG */
+.hero-luffy{width:180px;height:180px;margin:0 auto 20px;animation:luffyFloat 3s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(232,168,32,.3));}
+@keyframes luffyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
-/* Ship */
-.ship { position: absolute; bottom: 170px; left: -120px; font-size: 60px; animation: sail 20s linear infinite; z-index: 5; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
-@keyframes sail { 0% { left: -120px; transform: translateY(0) rotate(-2deg); } 25% { transform: translateY(-15px) rotate(1deg); } 50% { transform: translateY(0) rotate(-1deg); } 75% { transform: translateY(-10px) rotate(2deg); } 100% { left: 110%; transform: translateY(0) rotate(-2deg); } }
-
-.hero-content { position: relative; z-index: 2; text-align: center; padding: 0 20px; }
-.jolly-roger { width: 100px; height: 120px; margin: 0 auto 30px; position: relative; animation: rogerFloat 3s ease-in-out infinite; }
-@keyframes rogerFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-.jolly-roger .skull { width: 60px; height: 64px; background: var(--white); border-radius: 50% 50% 45% 45%; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); box-shadow: inset 0 4px 8px rgba(0,0,0,0.15); }
-.jolly-roger .jaw { width: 48px; height: 28px; background: var(--white); position: absolute; left: 50%; top: 58px; transform: translateX(-50%); border-radius: 0 0 10px 10px; }
-.jolly-roger .eye { position: absolute; width: 12px; height: 14px; background: var(--bg-deep); border-radius: 50%; top: 28px; z-index: 2; }
-.jolly-roger .eye.left { left: 38px; } .jolly-roger .eye.right { right: 38px; }
-.jolly-roger .nose { position: absolute; width: 8px; height: 8px; background: var(--bg-deep); border-radius: 50%; left: 50%; top: 42px; transform: translateX(-50%); z-index: 2; }
-.jolly-roger .mouth { position: absolute; left: 50%; top: 56px; transform: translateX(-50%); width: 26px; height: 10px; border-bottom: 2px solid var(--bg-deep); border-radius: 0 0 14px 14px; z-index: 2; }
-.jolly-roger .crossbones { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.jolly-roger .crossbones::before, .jolly-roger .crossbones::after { content: ''; position: absolute; width: 90px; height: 4px; background: var(--white); border-radius: 2px; top: 50px; left: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-.jolly-roger .crossbones::before { transform: rotate(25deg); } .jolly-roger .crossbones::after { transform: rotate(-25deg); }
-.jolly-roger .crossbones .circle { position: absolute; width: 16px; height: 16px; border: 4px solid var(--white); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
-.jolly-roger .crossbones .circle.c1 { left: 0; top: 38px; } .jolly-roger .crossbones .circle.c2 { right: 0; top: 38px; }
-
-.hero h1 { font-size: clamp(36px, 7vw, 62px); font-weight: 900; letter-spacing: 8px; }
-.hero h1 .accent { color: var(--gold); text-shadow: 0 0 40px rgba(232,168,32,0.5); }
-.hero h1 .typed { color: var(--white); border-right: 3px solid var(--gold); animation: cursorBlink 0.7s step-end infinite; }
-@keyframes cursorBlink { 0%,100% { border-color: var(--gold); } 50% { border-color: transparent; } }
-.hero .subtitle { font-size: clamp(14px, 2vw, 18px); color: var(--text-dim); margin-top: 14px; letter-spacing: 3px; animation: fadeInUp 1s 0.5s both; }
-.hero .bounty-tag { display: inline-block; margin-top: 20px; padding: 8px 28px; border: 1px solid var(--gold); color: var(--gold); font-family: Georgia, serif; font-style: italic; font-size: 16px; border-radius: 2px; letter-spacing: 2px; animation: fadeInUp 1s 0.8s both; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.hero-btns { margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1s 1.1s both; }
-.btn { display: inline-block; padding: 15px 38px; font-size: 16px; font-weight: 700; text-decoration: none; border-radius: 4px; cursor: pointer; letter-spacing: 1px; transition: all 0.3s; font-family: inherit; position: relative; overflow: hidden; }
-.btn::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.15); transform: translate(-50%,-50%); transition: width 0.6s, height 0.6s; }
-.btn:active::after { width: 300px; height: 300px; }
-.btn-primary { background: var(--red); color: #fff; border: none; box-shadow: 0 4px 25px rgba(212,74,58,0.4); }
-.btn-primary:hover { background: var(--red-bright); transform: translateY(-3px); box-shadow: 0 10px 35px rgba(212,74,58,0.6); }
-.btn-ghost { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
-.btn-ghost:hover { background: var(--gold); color: var(--bg-deep); transform: translateY(-3px); }
-.scroll-hint { margin-top: 55px; animation: bounce 2s infinite; }
-.scroll-hint span { display: block; color: var(--text-muted); font-size: 12px; letter-spacing: 2px; margin-bottom: 6px; }
-.scroll-hint .arrow { font-size: 22px; color: var(--gold); }
-@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(12px); } }
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 20px;}
+.hero h1{font-size:clamp(36px,7vw,62px);font-weight:900;letter-spacing:8px;}
+.hero h1 .accent{color:var(--gold);text-shadow:0 0 40px rgba(232,168,32,.5);}
+.hero .subtitle{font-size:clamp(14px,2vw,18px);color:var(--text-dim);margin-top:14px;letter-spacing:3px;animation:fadeInUp 1s .5s both;}
+.hero .bounty-tag{display:inline-block;margin-top:20px;padding:8px 28px;border:1px solid var(--gold);color:var(--gold);font-family:Georgia,serif;font-style:italic;font-size:16px;border-radius:2px;letter-spacing:2px;animation:fadeInUp 1s .8s both;}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-btns{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s 1.1s both;}
+.btn{display:inline-block;padding:15px 38px;font-size:16px;font-weight:700;text-decoration:none;border-radius:4px;cursor:pointer;letter-spacing:1px;transition:all .3s;font-family:inherit;position:relative;overflow:hidden;}
+.btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,.15);transform:translate(-50%,-50%);transition:width .6s,height .6s;}
+.btn:active::after{width:300px;height:300px;}
+.btn-primary{background:var(--red);color:#fff;border:none;box-shadow:0 4px 25px rgba(212,74,58,.4);}
+.btn-primary:hover{background:var(--red-bright);transform:translateY(-3px);box-shadow:0 10px 35px rgba(212,74,58,.6);}
+.btn-ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);}
+.btn-ghost:hover{background:var(--gold);color:var(--bg-deep);transform:translateY(-3px);}
+.scroll-hint{margin-top:55px;animation:bounce 2s infinite;}
+.scroll-hint span{display:block;color:var(--text-muted);font-size:12px;letter-spacing:2px;margin-bottom:6px;}
+.scroll-hint .arrow{font-size:22px;color:var(--gold);}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
 
 /* ═══════════════════════ Section Common ═══════════════════════ */
-.section { padding: 90px 20px; max-width: 1100px; margin: 0 auto; }
-.section-title { text-align: center; margin-bottom: 60px; }
-.section-title h2 { font-size: clamp(26px, 4vw, 38px); color: var(--white); letter-spacing: 4px; font-weight: 900; }
-.section-title .line { width: 60px; height: 3px; background: var(--gold); margin: 16px auto 12px; }
-.section-title p { color: var(--text-dim); font-size: 14px; letter-spacing: 1px; }
+.section{padding:90px 20px;max-width:1100px;margin:0 auto;}
+.section-title{text-align:center;margin-bottom:60px;}
+.section-title h2{font-size:clamp(26px,4vw,38px);color:var(--white);letter-spacing:4px;font-weight:900;}
+.section-title .line{width:60px;height:3px;background:var(--gold);margin:16px auto 12px;}
+.section-title p{color:var(--text-dim);font-size:14px;letter-spacing:1px;}
 
 /* ═══════════════════════ Story Timeline ═══════════════════════ */
-#story { background: var(--bg-main); position: relative; }
-.story-wrapper { position: relative; padding-left: 60px; }
-.story-line { position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--red), var(--blue), var(--green), var(--gold-dim)); border-radius: 1px; }
-.story-ship { position: absolute; left: 15px; font-size: 28px; transition: top 0.15s linear; z-index: 10; pointer-events: none; filter: drop-shadow(0 0 6px rgba(232,168,32,0.5)); }
-.story-item { position: relative; margin-bottom: 50px; padding-left: 0; }
-.story-item:last-child { margin-bottom: 0; }
-.story-dot { position: absolute; left: -37px; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px rgba(232,168,32,0.5); z-index: 5; }
-.story-item:nth-child(2) .story-dot { background: var(--red); box-shadow: 0 0 12px rgba(212,74,58,0.5); }
-.story-item:nth-child(3) .story-dot { background: var(--blue); box-shadow: 0 0 12px rgba(74,144,217,0.5); }
-.story-item:nth-child(4) .story-dot { background: var(--green); box-shadow: 0 0 12px rgba(58,172,122,0.5); }
-.story-item:nth-child(5) .story-dot { background: var(--orange); box-shadow: 0 0 12px rgba(240,160,64,0.5); }
-.story-item h4 { font-size: 13px; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px; }
-.story-item h3 { font-size: 22px; color: var(--white); margin-bottom: 8px; letter-spacing: 2px; }
-.story-item p { color: var(--text-dim); font-size: 14px; line-height: 1.7; max-width: 600px; }
+#story{background:var(--bg-main);position:relative;}
+.story-wrapper{position:relative;padding-left:60px;}
+.story-line{position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--red),var(--blue),var(--green),var(--gold-dim));border-radius:1px;}
+.story-ship{position:absolute;left:15px;font-size:28px;transition:top .15s linear;z-index:10;pointer-events:none;filter:drop-shadow(0 0 6px rgba(232,168,32,.5));}
+.story-item{position:relative;margin-bottom:50px;padding-left:0;}
+.story-item:last-child{margin-bottom:0;}
+.story-dot{position:absolute;left:-37px;top:6px;width:14px;height:14px;border-radius:50%;box-shadow:0 0 12px rgba(232,168,32,.5);z-index:5;}
+.story-item:nth-child(2) .story-dot{background:var(--red);box-shadow:0 0 12px rgba(212,74,58,.5);}
+.story-item:nth-child(3) .story-dot{background:var(--blue);box-shadow:0 0 12px rgba(74,144,217,.5);}
+.story-item:nth-child(4) .story-dot{background:var(--green);box-shadow:0 0 12px rgba(58,172,122,.5);}
+.story-item:nth-child(5) .story-dot{background:var(--orange);box-shadow:0 0 12px rgba(240,160,64,.5);}
+.story-item h4{font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:4px;}
+.story-item h3{font-size:22px;color:var(--white);margin-bottom:8px;letter-spacing:2px;}
+.story-item p{color:var(--text-dim);font-size:14px;line-height:1.7;max-width:600px;}
 
-/* ═══════════════════════ Features Cards 3D ═══════════════════════ */
-#features { background: var(--bg-deep); }
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 28px; perspective: 1200px; }
-.bounty-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: visible; transition: box-shadow 0.4s, border-color 0.4s; position: relative; cursor: default; transform-style: preserve-3d; }
-.bounty-card:hover { border-color: var(--gold); box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 10; }
-.bounty-card .card-inner { transition: transform 0.15s ease-out; border-radius: 8px; overflow: hidden; }
-.bounty-card .card-top { padding: 28px 28px 0; position: relative; }
-.bounty-card .icon { font-size: 42px; margin-bottom: 10px; display: block; transition: transform 0.3s; }
-.bounty-card:hover .icon { transform: scale(1.1); }
-.bounty-card h3 { font-size: 20px; color: var(--white); margin-bottom: 6px; letter-spacing: 2px; }
-.bounty-card .desc { color: var(--text-dim); font-size: 13px; line-height: 1.6; min-height: 40px; }
-.bounty-card .card-bottom { margin-top: 16px; padding: 12px 28px; background: var(--bg-card2); display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
-.bounty-card .bounty { font-family: Georgia, serif; font-style: italic; color: var(--gold); font-size: 14px; }
-.bounty-card .crew-stripe { position: absolute; left: 0; top: 0; width: 5px; height: 100%; border-radius: 8px 0 0 8px; }
-.stripe-red { background: var(--red); } .stripe-green { background: var(--green); } .stripe-orange { background: var(--orange); } .stripe-blue { background: var(--blue); } .stripe-gold { background: var(--gold); }
-.bounty-card::after { content: 'WANTED'; position: absolute; right: 16px; top: 16px; font-family: Georgia, serif; font-size: 10px; color: rgba(212,74,58,0.12); letter-spacing: 3px; font-weight: 700; pointer-events: none; transition: color 0.3s; }
-.bounty-card:hover::after { color: rgba(212,74,58,0.3); }
+/* ═══════════════════════ Features Cards ═══════════════════════ */
+#features{background:var(--bg-deep);}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:28px;perspective:1200px;}
+.bounty-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;overflow:visible;transition:box-shadow .4s,border-color .4s;position:relative;cursor:default;transform-style:preserve-3d;}
+.bounty-card:hover{border-color:var(--gold);box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:10;}
+.bounty-card .card-inner{transition:transform .15s ease-out;border-radius:10px;overflow:hidden;position:relative;}
+.bounty-card .card-top{padding:24px 24px 0;position:relative;text-align:center;}
 
-/* Card tutorial accordion */
-.card-tutorial { padding: 0 28px; max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; background: rgba(0,0,0,0.2); }
-.bounty-card.expanded .card-tutorial { max-height: 250px; padding: 16px 28px; border-top: 1px solid var(--border); }
-.card-tutorial h5 { font-size: 12px; color: var(--gold-dim); letter-spacing: 2px; margin-bottom: 8px; }
-.card-tutorial ol { font-size: 12px; color: var(--text-dim); padding-left: 18px; line-height: 2; }
-.card-tutorial ol li::marker { color: var(--gold); font-weight: bold; }
-.card-expand-btn { display: block; width: 100%; padding: 10px; background: none; border: none; color: var(--text-muted); font-size: 11px; letter-spacing: 2px; cursor: pointer; transition: color 0.3s; font-family: inherit; }
-.card-expand-btn:hover { color: var(--gold); }
-.card-expand-btn .arrow-icon { display: inline-block; transition: transform 0.3s; }
-.bounty-card.expanded .card-expand-btn .arrow-icon { transform: rotate(180deg); }
+/* Character SVG portraits */
+.char-portrait{width:100px;height:100px;margin:0 auto 12px;transition:transform .4s;}
+.bounty-card:hover .char-portrait{transform:scale(1.1);}
+.char-portrait svg{width:100%;height:100%;}
+@keyframes charIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
-/* Mouse glow */
-.glow-cursor { position: fixed; pointer-events: none; z-index: 9999; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(232,168,32,0.08) 0%, transparent 70%); transform: translate(-50%,-50%); transition: opacity 0.3s; opacity: 0; }
+.bounty-card h3{font-size:20px;color:var(--white);margin-bottom:6px;letter-spacing:2px;}
+.bounty-card .desc{color:var(--text-dim);font-size:13px;line-height:1.6;min-height:40px;}
+.bounty-card .card-bottom{margin-top:14px;padding:12px 24px;background:var(--bg-card2);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);}
+.bounty-card .bounty{font-family:Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;}
+.bounty-card .crew-stripe{position:absolute;left:0;top:0;width:5px;height:100%;border-radius:10px 0 0 10px;}
+.stripe-red{background:var(--red);}.stripe-green{background:var(--green);}.stripe-orange{background:var(--orange);}.stripe-blue{background:var(--blue);}.stripe-gold{background:var(--gold);}
+
+/* Card tutorial */
+.card-tutorial{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .5s ease;background:rgba(0,0,0,.2);}
+.bounty-card.expanded .card-tutorial{max-height:260px;padding:16px 24px;border-top:1px solid var(--border);}
+.card-tutorial h5{font-size:12px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:8px;}
+.card-tutorial ol{font-size:12px;color:var(--text-dim);padding-left:18px;line-height:2;}
+.card-tutorial ol li::marker{color:var(--gold);font-weight:bold;}
+.card-expand-btn{display:block;width:100%;padding:10px;background:none;border:none;color:var(--text-muted);font-size:11px;letter-spacing:2px;cursor:pointer;transition:color .3s;font-family:inherit;}
+.card-expand-btn:hover{color:var(--gold);}
+.card-expand-btn .arrow-icon{display:inline-block;transition:transform .3s;}
+.bounty-card.expanded .card-expand-btn .arrow-icon{transform:rotate(180deg);}
+
+/* ═══════════════════════ Glow ═══════════════════════ */
+.glow-cursor{position:fixed;pointer-events:none;z-index:9999;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,32,.08) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .3s;opacity:0;}
 
 /* ═══════════════════════ Highlights ═══════════════════════ */
-#highlights { background: var(--bg-main); background-image: radial-gradient(ellipse at 50% 0%, rgba(232,168,32,0.04) 0%, transparent 60%); }
-.highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; text-align: center; }
-.highlight-item .hl-icon { font-size: 52px; display: block; margin-bottom: 16px; transition: transform 0.3s; }
-.highlight-item:hover .hl-icon { transform: scale(1.15) rotate(-5deg); }
-.highlight-item h4 { font-size: 17px; color: var(--white); margin-bottom: 8px; letter-spacing: 2px; }
-.highlight-item p { color: var(--text-dim); font-size: 13px; }
+#highlights{background:var(--bg-main);background-image:radial-gradient(ellipse at 50% 0%,rgba(232,168,32,.04) 0%,transparent 60%);}
+.highlights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px;text-align:center;}
+.highlight-item .hl-icon{font-size:52px;display:block;margin-bottom:16px;transition:transform .3s;}
+.highlight-item:hover .hl-icon{transform:scale(1.15) rotate(-5deg);}
+.highlight-item h4{font-size:17px;color:var(--white);margin-bottom:8px;letter-spacing:2px;}
+.highlight-item p{color:var(--text-dim);font-size:13px;}
 
 /* ═══════════════════════ FAQ ═══════════════════════ */
-#faq { background: var(--bg-deep); }
-.faq-list { max-width: 700px; margin: 0 auto; }
-.faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.3s; }
-.faq-item:hover { border-color: var(--gold); }
-.faq-q { width: 100%; padding: 18px 22px; background: none; border: none; color: var(--text); font-size: 15px; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-family: inherit; letter-spacing: 1px; transition: color 0.3s; }
-.faq-q:hover { color: var(--gold); }
-.faq-q .faq-icon { font-size: 20px; color: var(--gold); transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
-.faq-item.open .faq-q .faq-icon { transform: rotate(45deg); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
-.faq-item.open .faq-a { max-height: 200px; }
-.faq-a-inner { padding: 0 22px 18px; color: var(--text-dim); font-size: 13px; line-height: 1.8; }
+#faq{background:var(--bg-deep);}
+.faq-list{max-width:700px;margin:0 auto;}
+.faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;margin-bottom:12px;overflow:hidden;transition:border-color .3s;}
+.faq-item:hover{border-color:var(--gold);}
+.faq-q{width:100%;padding:18px 22px;background:none;border:none;color:var(--text);font-size:15px;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:inherit;letter-spacing:1px;transition:color .3s;}
+.faq-q:hover{color:var(--gold);}
+.faq-q .faq-icon{font-size:20px;color:var(--gold);transition:transform .3s;flex-shrink:0;margin-left:12px;}
+.faq-item.open .faq-q .faq-icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a-inner{padding:0 22px 18px;color:var(--text-dim);font-size:13px;line-height:1.8;}
 
 /* ═══════════════════════ Download ═══════════════════════ */
-#download { background: var(--bg-main); text-align: center; }
-.download-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 50px 30px; max-width: 620px; margin: 0 auto; position: relative; transition: border-color 0.4s, box-shadow 0.4s; }
-.download-box:hover { border-color: var(--gold); box-shadow: 0 0 50px rgba(232,168,32,0.1); }
-.download-box .version { color: var(--text-dim); font-size: 14px; margin-bottom: 6px; }
-.download-box .size-info { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
-.download-box .requirements { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 24px; color: var(--text-muted); font-size: 12px; }
-.download-box .requirements span { padding: 4px 14px; border: 1px solid var(--border); border-radius: 20px; transition: border-color 0.3s; }
-.download-box .requirements span:hover { border-color: var(--gold); }
-.btn-download { display: inline-block; padding: 20px 55px; font-size: 18px; font-weight: 700; text-decoration: none; border-radius: 6px; cursor: pointer; letter-spacing: 2px; transition: all 0.3s; font-family: inherit; background: var(--red); color: #fff; border: none; box-shadow: 0 6px 30px rgba(212,74,58,0.5); position: relative; overflow: hidden; }
-.btn-download:hover { background: var(--red-bright); transform: translateY(-3px); box-shadow: 0 14px 45px rgba(212,74,58,0.7); }
-.btn-download:active { transform: scale(0.97); }
-.btn-download .dl-icon { font-size: 22px; margin-right: 8px; }
-.download-progress { width: 100%; height: 3px; background: var(--border); border-radius: 2px; margin-top: 20px; overflow: hidden; opacity: 0; transition: opacity 0.3s; }
-.download-progress .bar { width: 0; height: 100%; background: var(--gold); border-radius: 2px; animation: none; }
-@keyframes dlProgress { 0% { width: 0; } 30% { width: 45%; } 60% { width: 72%; } 100% { width: 100%; } }
+#download{background:var(--bg-main);text-align:center;}
+.download-box{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:50px 30px;max-width:620px;margin:0 auto;transition:border-color .4s,box-shadow .4s;}
+.download-box:hover{border-color:var(--gold);box-shadow:0 0 50px rgba(232,168,32,.1);}
+.download-box .version{color:var(--text-dim);font-size:14px;margin-bottom:6px;}
+.download-box .size-info{color:var(--text-muted);font-size:13px;margin-bottom:24px;}
+.download-box .requirements{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:24px;color:var(--text-muted);font-size:12px;}
+.download-box .requirements span{padding:4px 14px;border:1px solid var(--border);border-radius:20px;transition:border-color .3s;}
+.download-box .requirements span:hover{border-color:var(--gold);}
+.btn-download{display:inline-block;padding:20px 55px;font-size:18px;font-weight:700;text-decoration:none;border-radius:6px;cursor:pointer;letter-spacing:2px;transition:all .3s;font-family:inherit;background:var(--red);color:#fff;border:none;box-shadow:0 6px 30px rgba(212,74,58,.5);}
+.btn-download:hover{background:var(--red-bright);transform:translateY(-3px);box-shadow:0 14px 45px rgba(212,74,58,.7);}
+.btn-download:active{transform:scale(.97);}
+.btn-download .dl-icon{font-size:22px;margin-right:8px;}
+.download-progress{width:100%;height:3px;background:var(--border);border-radius:2px;margin-top:20px;overflow:hidden;opacity:0;transition:opacity .3s;}
+.download-progress .bar{width:0;height:100%;background:var(--gold);border-radius:2px;animation:none;}
+@keyframes dlProgress{0%{width:0}30%{width:45%}60%{width:72%}100%{width:100%}}
 
 /* ═══════════════════════ Changelog ═══════════════════════ */
-#changelog { background: var(--bg-deep); }
-.timeline { max-width: 600px; margin: 0 auto; position: relative; padding-left: 40px; }
-.timeline::before { content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--border)); border-radius: 1px; }
-.tl-item { position: relative; margin-bottom: 32px; }
-.tl-item:last-child { margin-bottom: 0; }
-.tl-dot { position: absolute; left: -32px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px rgba(232,168,32,0.4); }
-.tl-item:last-child .tl-dot { background: var(--red); box-shadow: 0 0 10px rgba(212,74,58,0.4); }
-.tl-version { font-size: 12px; color: var(--gold); letter-spacing: 2px; margin-bottom: 2px; }
-.tl-item:last-child .tl-version { color: var(--red-bright); }
-.tl-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
-.tl-body { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
-.tl-body ul { padding-left: 16px; }
-.tl-body ul li { margin-bottom: 2px; }
-.tl-body ul li::marker { color: var(--gold-dim); }
+#changelog{background:var(--bg-deep);}
+.timeline{max-width:600px;margin:0 auto;position:relative;padding-left:40px;}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--border));border-radius:1px;}
+.tl-item{position:relative;margin-bottom:32px;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{position:absolute;left:-32px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(232,168,32,.4);}
+.tl-item:last-child .tl-dot{background:var(--red);box-shadow:0 0 10px rgba(212,74,58,.4);}
+.tl-version{font-size:12px;color:var(--gold);letter-spacing:2px;margin-bottom:2px;}
+.tl-item:last-child .tl-version{color:var(--red-bright);}
+.tl-date{font-size:11px;color:var(--text-muted);margin-bottom:6px;}
+.tl-body{font-size:13px;color:var(--text-dim);line-height:1.7;}
+.tl-body ul{padding-left:16px;}
+.tl-body ul li{margin-bottom:2px;}
+.tl-body ul li::marker{color:var(--gold-dim);}
 
 /* ═══════════════════════ Footer ═══════════════════════ */
-footer { background: var(--bg-deep); border-top: 1px solid var(--border); text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 12px; letter-spacing: 1px; }
-footer .gold { color: var(--gold-dim); }
+footer{background:var(--bg-deep);border-top:1px solid var(--border);text-align:center;padding:40px 20px;color:var(--text-muted);font-size:12px;letter-spacing:1px;}
+footer .gold{color:var(--gold-dim);}
 
 /* ═══════════════════════ Scroll Reveal ═══════════════════════ */
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
 /* ═══════════════════════ Mobile ═══════════════════════ */
-@media (max-width: 768px) {
-  .top-nav { padding: 12px 16px; }
-  .nav-links { position: fixed; top: 0; right: -100%; width: 70%; max-width: 280px; height: 100vh; background: rgba(6,14,26,0.98); backdrop-filter: blur(15px); flex-direction: column; gap: 0; padding: 80px 30px 30px; transition: right 0.4s ease; border-left: 1px solid var(--border); }
-  .nav-links.open { right: 0; }
-  .nav-links a { font-size: 15px; padding: 14px 0; border-bottom: 1px solid var(--border); display: block; }
-  .nav-dl { text-align: center; margin-top: 12px; border-bottom: none; }
-  .hamburger { display: flex; }
-  .hero h1 { letter-spacing: 4px; }
-  .hero-btns { flex-direction: column; align-items: center; }
-  .story-wrapper { padding-left: 40px; }
-  .story-line { left: 18px; }
-  .story-ship { left: 5px; font-size: 22px; }
-  .story-dot { left: -27px; width: 12px; height: 12px; }
-  .features-grid { grid-template-columns: 1fr; }
-  .section { padding: 50px 16px; }
-  .download-box { padding: 30px 18px; }
-  .sound-toggle { bottom: 16px; right: 16px; width: 38px; height: 38px; font-size: 16px; }
-  .moon { width: 50px; height: 50px; right: 8%; }
-  .ship { bottom: 140px; font-size: 40px; }
+@media(max-width:768px){
+  .top-nav{padding:12px 16px;}
+  .nav-links{position:fixed;top:0;right:-100%;width:70%;max-width:280px;height:100vh;background:rgba(6,14,26,.98);backdrop-filter:blur(15px);flex-direction:column;gap:0;padding:80px 30px 30px;transition:right .4s ease;border-left:1px solid var(--border);}
+  .nav-links.open{right:0;}
+  .nav-links a{font-size:15px;padding:14px 0;border-bottom:1px solid var(--border);display:block;}
+  .nav-dl{text-align:center;margin-top:12px;border-bottom:none;}
+  .hamburger{display:flex;}
+  .hero-luffy{width:130px;height:130px;}
+  .hero h1{letter-spacing:4px;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .story-wrapper{padding-left:40px;}
+  .story-line{left:18px;}.story-ship{left:5px;font-size:22px;}.story-dot{left:-27px;width:12px;height:12px;}
+  .features-grid{grid-template-columns:1fr;}
+  .section{padding:50px 16px;}
+  .download-box{padding:30px 18px;}
+  .sound-toggle{bottom:16px;right:16px;width:38px;height:38px;font-size:16px;}
+  .moon{width:50px;height:50px;right:8%;}
+  .char-portrait{width:80px;height:80px;}
 }
-@media (max-width: 480px) {
-  .hero h1 { font-size: 28px; letter-spacing: 2px; }
-  .btn { padding: 12px 28px; font-size: 14px; }
-  .btn-download { padding: 16px 35px; font-size: 15px; }
-  .timeline { padding-left: 30px; }
-  .timeline::before { left: 10px; }
-  .tl-dot { left: -24px; width: 10px; height: 10px; }
+@media(max-width:480px){
+  .hero h1{font-size:28px;letter-spacing:2px;}
+  .btn{padding:12px 28px;font-size:14px;}
+  .btn-download{padding:16px 35px;font-size:15px;}
+  .timeline{padding-left:30px;}
+  .timeline::before{left:10px;}
+  .tl-dot{left:-24px;width:10px;height:10px;}
+  .hero-luffy{width:100px;height:100px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ Mouse Glow ══ -->
 <div class="glow-cursor" id="glow"></div>
 
 <!-- ══ Nav ══ -->
 <nav class="top-nav" id="nav">
   <a href="#" class="nav-brand">☠ 抓马工具</a>
-  <button class="hamburger" id="hamburger" aria-label="菜单">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
   <ul class="nav-links" id="navLinks">
     <li><a href="#story">航海日志</a></li>
     <li><a href="#features">悬赏令</a></li>
@@ -265,7 +249,6 @@ footer .gold { color: var(--gold-dim); }
   </ul>
 </nav>
 
-<!-- ══ Sound Toggle ══ -->
 <button class="sound-toggle" id="soundToggle" title="音效开关" aria-label="音效开关">🔇</button>
 
 <!-- ══ Hero ══ -->
@@ -275,14 +258,52 @@ footer .gold { color: var(--gold-dim); }
   <div class="lightning" style="left:18%;height:200px;animation-delay:0s;"></div>
   <div class="lightning" style="left:55%;height:160px;animation-delay:4s;"></div>
   <div class="lightning" style="left:78%;height:180px;animation-delay:7s;"></div>
-  <div class="ship" id="heroShip">⛵</div>
+  <div class="ship">⛵</div>
 
   <div class="hero-content">
-    <div class="jolly-roger">
-      <div class="skull"></div><div class="jaw"></div>
-      <div class="eye left"></div><div class="eye right"></div>
-      <div class="nose"></div><div class="mouth"></div>
-      <div class="crossbones"><div class="circle c1"></div><div class="circle c2"></div></div>
+    <!-- Luffy SVG portrait -->
+    <div class="hero-luffy">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="skinG" cx="50%" cy="40%"><stop offset="0%" stop-color="#ffe4c4"/><stop offset="100%" stop-color="#e8b878"/></radialGradient>
+          <radialGradient id="hatG" cx="50%" cy="30%"><stop offset="0%" stop-color="#f0d878"/><stop offset="100%" stop-color="#c89830"/></radialGradient>
+          <radialGradient id="vestG" cx="50%" cy="50%"><stop offset="0%" stop-color="#e85040"/><stop offset="100%" stop-color="#a02020"/></radialGradient>
+        </defs>
+        <!-- Straw hat brim -->
+        <ellipse cx="100" cy="48" rx="70" ry="16" fill="url(#hatG)" stroke="#a07820" stroke-width="2"/>
+        <ellipse cx="100" cy="48" rx="70" ry="16" fill="none" stroke="#d4a840" stroke-width="1" stroke-dasharray="8,12"/>
+        <!-- Hat crown -->
+        <ellipse cx="100" cy="42" rx="44" ry="24" fill="url(#hatG)" stroke="#a07820" stroke-width="2"/>
+        <path d="M56 42 Q60 28 100 26 Q140 28 144 42" fill="url(#hatG)" stroke="#a07820" stroke-width="2"/>
+        <!-- Red ribbon -->
+        <rect x="56" y="38" width="88" height="7" rx="3" fill="var(--red)"/>
+        <!-- Hair (black spikes under hat) -->
+        <path d="M60 55 Q55 65 58 75 Q62 68 65 72 Q68 65 70 70 Q72 62 75 68 Q78 60 80 58" fill="#1a1a2e"/>
+        <path d="M120 58 Q122 60 125 68 Q128 62 130 70 Q132 65 135 72 Q138 68 140 75 Q142 65 140 55" fill="#1a1a2e"/>
+        <!-- Face -->
+        <ellipse cx="100" cy="72" rx="36" ry="34" fill="url(#skinG)"/>
+        <!-- Eyes -->
+        <ellipse cx="86" cy="66" rx="8" ry="9" fill="#fff" stroke="#333" stroke-width="1.5"/>
+        <circle cx="87" cy="65" r="4.5" fill="#111"/>
+        <circle cx="88.5" cy="63" r="1.5" fill="#fff"/>
+        <ellipse cx="114" cy="66" rx="8" ry="9" fill="#fff" stroke="#333" stroke-width="1.5"/>
+        <circle cx="115" cy="65" r="4.5" fill="#111"/>
+        <circle cx="116.5" cy="63" r="1.5" fill="#fff"/>
+        <!-- Big grin -->
+        <path d="M78 82 Q88 100 100 102 Q112 100 122 82" fill="#c0392b" stroke="#333" stroke-width="2"/>
+        <path d="M82 84 Q90 95 100 97 Q110 95 118 84" fill="#e74c3c"/>
+        <!-- Teeth -->
+        <rect x="90" y="83" width="8" height="8" rx="1" fill="#fff"/>
+        <rect x="102" y="83" width="8" height="8" rx="1" fill="#fff"/>
+        <!-- Nose -->
+        <ellipse cx="100" cy="74" rx="3" ry="2" fill="#d4a878"/>
+        <!-- Scar under left eye -->
+        <path d="M76 70 Q74 74 75 78" fill="none" stroke="#c08060" stroke-width="1" opacity="0.6"/>
+        <!-- Body/vest -->
+        <path d="M65 100 L60 150 L140 150 L135 100 Z" fill="url(#vestG)" stroke="#8a1a1a" stroke-width="1.5"/>
+        <!-- Vest opening -->
+        <line x1="100" y1="100" x2="100" y2="150" stroke="#ffd0c0" stroke-width="2" opacity="0.5"/>
+      </svg>
     </div>
 
     <h1><span class="accent">抓马工具</span></h1>
@@ -304,164 +325,252 @@ footer .gold { color: var(--gold-dim); }
 
 <!-- ══ Story Timeline ══ -->
 <section class="section" id="story">
-  <div class="section-title reveal">
-    <h2>航 海 日 志</h2><div class="line"></div>
-    <p>跟随草帽海贼团的足迹，探索五大视频去重神器</p>
-  </div>
-
+  <div class="section-title reveal"><h2>航 海 日 志</h2><div class="line"></div><p>跟随草帽海贼团的足迹，探索五大视频去重神器</p></div>
   <div class="story-wrapper">
     <div class="story-line"></div>
     <div class="story-ship" id="storyShip">🚢</div>
 
-    <div class="story-item reveal">
-      <div class="story-dot"></div>
-      <h4>第一站 · 转码之海</h4>
-      <h3>视频转码去重</h3>
-      <p>路飞带队穿越转码之海——重新编码视频，彻底改变文件指纹。每个视频都是一次全新的冒险，绝不重复。</p>
-    </div>
-    <div class="story-item reveal">
-      <div class="story-dot"></div>
-      <h4>第二站 · 混沌峡谷</h4>
-      <h3>MD5 批量修改</h3>
-      <p>索隆在混沌峡谷中挥剑斩断相同的 MD5——批量追加随机数据，每个副本都是独一无二的利刃。</p>
-    </div>
-    <div class="story-item reveal">
-      <div class="story-dot"></div>
-      <h4>第三站 · 拼接漩涡</h4>
-      <h3>视频拼接去重</h3>
-      <p>娜美在拼接漩涡中导航——多文件夹随机拼接 + 重编码，完美驾驭混乱的数据海洋。</p>
-    </div>
-    <div class="story-item reveal">
-      <div class="story-dot"></div>
-      <h4>第四站 · 配对迷宮</h4>
-      <h3>视频截取配对</h3>
-      <p>乌索普在配对迷宫中施展绝技——截取视频中段两两配对，组合出无数变化，让每个输出都充满惊喜。</p>
-    </div>
-    <div class="story-item reveal">
-      <div class="story-dot"></div>
-      <h4>终点站 · 宝藏自动化</h4>
-      <h3>剪映自动导出</h3>
-      <p>山治在终点站端上美味大餐——屏幕颜色检测自动化导出，解放双手，一键直达 ONE PIECE。</p>
-    </div>
+    <div class="story-item reveal"><div class="story-dot"></div><h4>第一站 · 转码之海</h4><h3>视频转码去重</h3><p>路飞带队穿越转码之海——重新编码视频，彻底改变文件指纹。每个视频都是一次全新的冒险，绝不重复。</p></div>
+    <div class="story-item reveal"><div class="story-dot"></div><h4>第二站 · 混沌峡谷</h4><h3>MD5 批量修改</h3><p>索隆在混沌峡谷中挥剑斩断相同的 MD5——批量追加随机数据，每个副本都是独一无二的利刃。</p></div>
+    <div class="story-item reveal"><div class="story-dot"></div><h4>第三站 · 拼接漩涡</h4><h3>视频拼接去重</h3><p>娜美在拼接漩涡中导航——多文件夹随机拼接 + 重编码，完美驾驭混乱的数据海洋。</p></div>
+    <div class="story-item reveal"><div class="story-dot"></div><h4>第四站 · 配对迷宮</h4><h3>视频截取配对</h3><p>乌索普在配对迷宫中施展绝技——截取视频中段两两配对，组合出无数变化。</p></div>
+    <div class="story-item reveal"><div class="story-dot"></div><h4>终点站 · 宝藏自动化</h4><h3>剪映自动导出</h3><p>山治在终点站端上美味大餐——屏幕颜色检测自动化导出，解放双手，一键直达 ONE PIECE。</p></div>
   </div>
 </section>
 
 <!-- ══ Features ══ -->
 <section class="section" id="features">
-  <div class="section-title reveal">
-    <h2>悬 赏 令</h2><div class="line"></div>
-    <p>WANTED DEAD OR ALIVE — 五大去重利器</p>
-  </div>
-
+  <div class="section-title reveal"><h2>悬 赏 令</h2><div class="line"></div><p>WANTED DEAD OR ALIVE — 五大去重利器</p></div>
   <div class="features-grid">
 
-    <!-- Card 1 -->
-    <div class="bounty-card reveal" data-tilt>
-      <div class="card-inner">
-        <div class="crew-stripe stripe-red"></div>
-        <div class="card-top">
-          <span class="icon">☠</span><h3>视频转码去重</h3>
-          <p class="desc">重新编码改变视频内容指纹，生成全新文件指纹，有效应对平台查重机制。</p>
-        </div>
-        <div class="card-bottom"><span>蒙奇·D·路飞</span><span class="bounty">悬赏金 8亿贝里</span></div>
-        <button class="card-expand-btn"><span class="arrow-icon">▼</span> 使用教程</button>
-        <div class="card-tutorial">
-          <h5>📖 如何使用</h5>
-          <ol>
-            <li>点击「选择文件夹」添加视频目录</li>
-            <li>设置输出格式和编码参数</li>
-            <li>点击「开始转码」一键处理</li>
-            <li>输出文件保存在源文件夹同级目录</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
+    <!-- Zoro -->
     <div class="bounty-card reveal" data-tilt>
       <div class="card-inner">
         <div class="crew-stripe stripe-green"></div>
         <div class="card-top">
-          <span class="icon">⚔</span><h3>MD5 批量修改</h3>
+          <div class="char-portrait" style="animation:charIdle 3s ease-in-out infinite;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><radialGradient id="zs" cx="50%" cy="40%"><stop offset="0%" stop-color="#ffe4c4"/><stop offset="100%" stop-color="#d4a878"/></radialGradient></defs>
+              <!-- Green spiky hair -->
+              <path d="M60 75 L55 30 L70 25 L75 18 L85 28 L92 15 L100 28 L108 15 L115 28 L125 18 L130 25 L145 30 L140 75" fill="#2ecc71" stroke="#1a7a3a" stroke-width="1.5"/>
+              <path d="M62 70 L58 40 L68 35 L74 28 L82 36 L90 24 L98 36 L106 24 L114 36 L122 28 L128 35 L138 40 L134 70" fill="#3ae87a"/>
+              <!-- Bandana -->
+              <path d="M57 78 L143 78 L148 85 L52 85 Z" fill="#111"/>
+              <!-- Face -->
+              <ellipse cx="100" cy="88" rx="32" ry="30" fill="url(#zs)"/>
+              <!-- Left eye (serious) -->
+              <ellipse cx="86" cy="82" rx="7" ry="6" fill="#fff" stroke="#333" stroke-width="1.2"/>
+              <circle cx="86" cy="82" r="3.5" fill="#111"/>
+              <!-- Right eye (closed/scar) -->
+              <line x1="108" y1="78" x2="120" y2="86" stroke="#333" stroke-width="2.5"/>
+              <!-- Mouth (serious line) -->
+              <line x1="88" y1="102" x2="112" y2="102" stroke="#333" stroke-width="2"/>
+              <!-- Three swords behind -->
+              <line x1="135" y1="20" x2="155" y2="110" stroke="#c0c0c0" stroke-width="4" stroke-linecap="round"/>
+              <line x1="145" y1="25" x2="162" y2="108" stroke="#d0d0d0" stroke-width="3" stroke-linecap="round"/>
+              <line x1="125" y1="22" x2="148" y2="112" stroke="#a0a0a0" stroke-width="3" stroke-linecap="round"/>
+              <!-- Sword hilts -->
+              <circle cx="135" cy="22" r="5" fill="#8b4513"/><circle cx="145" cy="27" r="4" fill="#a0522d"/><circle cx="125" cy="24" r="4" fill="#6b3410"/>
+              <!-- Green robe -->
+              <path d="M68 112 L60 170 L140 170 L132 112 Z" fill="#1a5a3a"/>
+              <!-- Red belt -->
+              <rect x="64" y="140" width="72" height="6" fill="var(--red)"/>
+            </svg>
+          </div>
+          <h3>MD5 批量修改</h3>
           <p class="desc">批量追加随机数据生成不同 MD5 副本，支持多文件同时处理，快速高效。</p>
         </div>
         <div class="card-bottom"><span>罗罗诺亚·索隆</span><span class="bounty">悬赏金 6亿贝里</span></div>
         <button class="card-expand-btn"><span class="arrow-icon">▼</span> 使用教程</button>
-        <div class="card-tutorial">
-          <h5>📖 如何使用</h5>
-          <ol>
-            <li>点击「选择文件」添加要修改的视频</li>
-            <li>设置生成副本数量和输出目录</li>
-            <li>点击「开始处理」批量生成</li>
-            <li>每个副本 MD5 完全不同，内容唯一</li>
-          </ol>
-        </div>
+        <div class="card-tutorial"><h5>📖 如何使用</h5><ol><li>点击「选择文件」添加视频</li><li>设置生成副本数量和输出目录</li><li>点击「开始处理」批量生成</li><li>每个副本 MD5 完全唯一</li></ol></div>
       </div>
     </div>
 
-    <!-- Card 3 -->
+    <!-- Nami -->
     <div class="bounty-card reveal" data-tilt>
       <div class="card-inner">
         <div class="crew-stripe stripe-gold"></div>
         <div class="card-top">
-          <span class="icon">☁</span><h3>视频拼接去重</h3>
+          <div class="char-portrait" style="animation:charIdle 3.5s ease-in-out infinite;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><radialGradient id="ns" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff0e0"/><stop offset="100%" stop-color="#f0c8a0"/></radialGradient></defs>
+              <!-- Orange hair -->
+              <ellipse cx="100" cy="42" rx="52" ry="38" fill="#f0a040"/>
+              <path d="M48 40 Q50 25 60 22 Q65 15 75 18 Q80 10 90 14 Q95 8 100 12 Q105 8 110 14 Q120 10 125 18 Q135 15 140 22 Q150 25 152 40" fill="#f0a040" stroke="#d08020" stroke-width="1"/>
+              <!-- Hair strands -->
+              <path d="M48 42 Q44 55 46 70" fill="none" stroke="#d08020" stroke-width="2"/>
+              <path d="M152 42 Q156 55 154 70" fill="none" stroke="#d08020" stroke-width="2"/>
+              <!-- Face -->
+              <ellipse cx="100" cy="68" rx="28" ry="30" fill="url(#ns)"/>
+              <!-- Eyes (winking) -->
+              <ellipse cx="87" cy="62" rx="6" ry="7" fill="#fff" stroke="#333" stroke-width="1.2"/>
+              <circle cx="88" cy="61" r="3.5" fill="#2a5a8a"/>
+              <circle cx="89.5" cy="59" r="1.5" fill="#fff"/>
+              <!-- Right eye wink -->
+              <path d="M108 60 Q113 56 118 60" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+              <ellipse cx="113" cy="62" rx="2" ry="1.5" fill="#e08080"/>
+              <!-- Mouth -->
+              <path d="M90 80 Q100 90 110 80" fill="none" stroke="#d06070" stroke-width="2" stroke-linecap="round"/>
+              <!-- Nose -->
+              <ellipse cx="100" cy="70" rx="2.5" ry="1.8" fill="#e0b898"/>
+              <!-- Tangerine earrings -->
+              <circle cx="68" cy="70" r="4" fill="#f0a040" stroke="#d08020" stroke-width="1"/>
+              <circle cx="132" cy="70" r="4" fill="#f0a040" stroke="#d08020" stroke-width="1"/>
+              <!-- Blue/white top -->
+              <path d="M72 94 L66 150 L134 150 L128 94 Z" fill="#4a90d9"/>
+              <rect x="74" y="105" width="52" height="4" rx="2" fill="#fff"/>
+              <rect x="78" y="115" width="44" height="4" rx="2" fill="#fff"/>
+            </svg>
+          </div>
+          <h3>视频拼接去重</h3>
           <p class="desc">多文件夹随机拼接 + 重编码，自动去重确保每个输出文件内容唯一。</p>
         </div>
         <div class="card-bottom"><span>娜美</span><span class="bounty">悬赏金 7亿贝里</span></div>
         <button class="card-expand-btn"><span class="arrow-icon">▼</span> 使用教程</button>
-        <div class="card-tutorial">
-          <h5>📖 如何使用</h5>
-          <ol>
-            <li>添加多个视频文件夹作为素材源</li>
-            <li>设置拼接数量和输出参数</li>
-            <li>点击「开始拼接」自动随机组合</li>
-            <li>每个输出视频由不同片段拼接而成</li>
-          </ol>
-        </div>
+        <div class="card-tutorial"><h5>📖 如何使用</h5><ol><li>添加多个视频文件夹</li><li>设置拼接数量和输出参数</li><li>点击「开始拼接」自动组合</li><li>每个输出由不同片段拼接</li></ol></div>
       </div>
     </div>
 
-    <!-- Card 4 -->
+    <!-- Usopp -->
     <div class="bounty-card reveal" data-tilt>
       <div class="card-inner">
         <div class="crew-stripe stripe-blue"></div>
         <div class="card-top">
-          <span class="icon">♨</span><h3>视频截取配对</h3>
+          <div class="char-portrait" style="animation:charIdle 4s ease-in-out infinite;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><radialGradient id="us" cx="50%" cy="40%"><stop offset="0%" stop-color="#ffe8d0"/><stop offset="100%" stop-color="#e0b890"/></radialGradient></defs>
+              <!-- Curly dark hair -->
+              <ellipse cx="100" cy="44" rx="48" ry="36" fill="#1a1a2e"/>
+              <circle cx="60" cy="40" r="12" fill="#1a1a2e"/><circle cx="140" cy="40" r="12" fill="#1a1a2e"/>
+              <circle cx="52" cy="50" r="10" fill="#1a1a2e"/><circle cx="148" cy="50" r="10" fill="#1a1a2e"/>
+              <!-- Face -->
+              <ellipse cx="100" cy="66" rx="26" ry="28" fill="url(#us)"/>
+              <!-- Long nose -->
+              <path d="M100 58 L100 42 Q100 36 104 34 L106 34 L106 36 Q102 38 102 58" fill="#e8c0a0" stroke="#c89878" stroke-width="1"/>
+              <ellipse cx="103" cy="37" rx="3" ry="2.5" fill="#d49878"/>
+              <!-- Eyes -->
+              <circle cx="88" cy="60" r="4" fill="#111"/><circle cx="112" cy="60" r="4" fill="#111"/>
+              <circle cx="89" cy="58" r="1.5" fill="#fff"/><circle cx="113" cy="58" r="1.5" fill="#fff"/>
+              <!-- Eyebrows (worried) -->
+              <path d="M80 52 Q88 48 94 50" fill="none" stroke="#333" stroke-width="1.5"/>
+              <path d="M106 50 Q112 48 120 52" fill="none" stroke="#333" stroke-width="1.5"/>
+              <!-- Mouth -->
+              <path d="M92 78 Q100 86 108 78" fill="none" stroke="#333" stroke-width="1.5"/>
+              <!-- Goggles on head -->
+              <ellipse cx="80" cy="28" rx="14" ry="10" fill="none" stroke="#c0a060" stroke-width="3"/>
+              <ellipse cx="120" cy="28" rx="14" ry="10" fill="none" stroke="#c0a060" stroke-width="3"/>
+              <line x1="94" y1="28" x2="106" y2="28" stroke="#c0a060" stroke-width="2"/>
+              <ellipse cx="80" cy="28" rx="10" ry="7" fill="rgba(200,220,240,.4)"/>
+              <ellipse cx="120" cy="28" rx="10" ry="7" fill="rgba(200,220,240,.4)"/>
+              <!-- Brown overalls -->
+              <path d="M74 90 L68 150 L132 150 L126 90 Z" fill="#8b6914"/>
+              <rect x="72" y="100" width="56" height="4" rx="2" fill="#a07818"/>
+            </svg>
+          </div>
+          <h3>视频截取配对</h3>
           <p class="desc">截取视频中段并两两配对组合，生成多样化片段，灵活配置截取参数。</p>
         </div>
         <div class="card-bottom"><span>乌索普</span><span class="bounty">悬赏金 5亿贝里</span></div>
         <button class="card-expand-btn"><span class="arrow-icon">▼</span> 使用教程</button>
-        <div class="card-tutorial">
-          <h5>📖 如何使用</h5>
-          <ol>
-            <li>选择视频文件夹作为素材源</li>
-            <li>设置截取起止时间和配对规则</li>
-            <li>点击「开始截取」批量处理</li>
-            <li>生成的片段自动两两配对输出</li>
-          </ol>
-        </div>
+        <div class="card-tutorial"><h5>📖 如何使用</h5><ol><li>选择视频文件夹</li><li>设置截取起止时间和配对规则</li><li>点击「开始截取」批量处理</li><li>片段自动两两配对输出</li></ol></div>
       </div>
     </div>
 
-    <!-- Card 5 -->
+    <!-- Sanji -->
     <div class="bounty-card reveal" data-tilt>
       <div class="card-inner">
         <div class="crew-stripe stripe-orange"></div>
         <div class="card-top">
-          <span class="icon">★</span><h3>剪映自动导出</h3>
+          <div class="char-portrait" style="animation:charIdle 3.3s ease-in-out infinite;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs><radialGradient id="ss" cx="50%" cy="40%"><stop offset="0%" stop-color="#ffe8d0"/><stop offset="100%" stop-color="#e8c0a0"/></radialGradient></defs>
+              <!-- Blonde hair covering left eye -->
+              <ellipse cx="100" cy="42" rx="50" ry="36" fill="#f0d060"/>
+              <path d="M50 42 Q48 30 55 20 Q62 12 70 14 Q78 10 85 16 Q90 8 95 14 Q100 10 105 16 Q115 12 120 18 Q130 14 136 22 Q144 30 148 42" fill="#f0d060" stroke="#c8a030" stroke-width="1"/>
+              <!-- Hair swoop over left eye -->
+              <path d="M52 50 Q55 35 65 28 Q72 24 78 48 Q80 58 78 68" fill="#f0d060" stroke="#c8a030" stroke-width="1"/>
+              <!-- Face -->
+              <ellipse cx="100" cy="66" rx="28" ry="30" fill="url(#ss)"/>
+              <!-- Left eye covered by hair - hidden -->
+              <!-- Right eye (visible, sharp) -->
+              <ellipse cx="112" cy="60" rx="6" ry="6" fill="#fff" stroke="#333" stroke-width="1"/>
+              <circle cx="113" cy="60" r="3" fill="#4a6aaa"/>
+              <circle cx="114" cy="58" r="1.2" fill="#fff"/>
+              <!-- Curly eyebrow (right side visible) -->
+              <path d="M108 52 Q115 46 122 50 Q126 52 124 48" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Mouth (smirk) -->
+              <path d="M98 78 Q106 84 114 78" fill="none" stroke="#c08060" stroke-width="2" stroke-linecap="round"/>
+              <!-- Nose -->
+              <ellipse cx="104" cy="68" rx="2.5" ry="2" fill="#d0a888"/>
+              <!-- Cigarette -->
+              <rect x="108" y="76" width="16" height="3" rx="1" fill="#fff" transform="rotate(-10,108,76)"/>
+              <circle cx="123" cy="74" r="2" fill="#f80"/>
+              <!-- Smoke wisps -->
+              <path d="M125 70 Q128 62 124 56" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M128 66 Q132 58 128 50" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-linecap="round"/>
+              <!-- Black suit -->
+              <path d="M72 92 L66 150 L134 150 L128 92 Z" fill="#1a1a2e"/>
+              <!-- Tie -->
+              <path d="M98 94 L94 130 L100 140 L106 130 L102 94 Z" fill="#f0d060"/>
+              <!-- Blue shirt -->
+              <rect x="74" y="95" width="52" height="8" rx="2" fill="#4a90d9"/>
+            </svg>
+          </div>
+          <h3>剪映自动导出</h3>
           <p class="desc">基于屏幕颜色检测的剪映自动化导出工具，解放双手，批量操作无压力。</p>
         </div>
         <div class="card-bottom"><span>山治</span><span class="bounty">悬赏金 4亿贝里</span></div>
         <button class="card-expand-btn"><span class="arrow-icon">▼</span> 使用教程</button>
-        <div class="card-tutorial">
-          <h5>📖 如何使用</h5>
-          <ol>
-            <li>确保剪映已打开并登录</li>
-            <li>设置导出参数和检测区域</li>
-            <li>点击「开始导出」自动操作</li>
-            <li>工具通过颜色检测自动完成导出</li>
-          </ol>
+        <div class="card-tutorial"><h5>📖 如何使用</h5><ol><li>确保剪映已打开并登录</li><li>设置导出参数和检测区域</li><li>点击「开始导出」自动操作</li><li>工具通过颜色检测自动导出</li></ol></div>
+      </div>
+    </div>
+
+    <!-- Luffy card -->
+    <div class="bounty-card reveal" data-tilt>
+      <div class="card-inner">
+        <div class="crew-stripe stripe-red"></div>
+        <div class="card-top">
+          <div class="char-portrait" style="animation:charIdle 2.8s ease-in-out infinite;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="ls" cx="50%" cy="40%"><stop offset="0%" stop-color="#ffe4c4"/><stop offset="100%" stop-color="#e8b878"/></radialGradient>
+                <radialGradient id="lh" cx="50%" cy="30%"><stop offset="0%" stop-color="#f0d878"/><stop offset="100%" stop-color="#c89830"/></radialGradient>
+              </defs>
+              <!-- Hat -->
+              <ellipse cx="100" cy="50" rx="62" ry="14" fill="url(#lh)" stroke="#a07820" stroke-width="1.5"/>
+              <ellipse cx="100" cy="44" rx="38" ry="20" fill="url(#lh)" stroke="#a07820" stroke-width="1.5"/>
+              <path d="M62 44 Q66 32 100 30 Q134 32 138 44" fill="url(#lh)" stroke="#a07820" stroke-width="1.5"/>
+              <rect x="62" y="40" width="76" height="6" rx="2" fill="var(--red)"/>
+              <!-- Hair -->
+              <path d="M64 55 Q60 64 62 72 Q66 66 68 70 Q72 63 74 68 Q78 60 62 55" fill="#1a1a2e"/>
+              <path d="M136 55 Q140 64 138 72 Q134 66 132 70 Q128 63 126 68 Q122 60 136 55" fill="#1a1a2e"/>
+              <!-- Face -->
+              <ellipse cx="100" cy="70" rx="30" ry="28" fill="url(#ls)"/>
+              <!-- Eyes -->
+              <ellipse cx="88" cy="64" rx="7" ry="8" fill="#fff" stroke="#333" stroke-width="1.2"/>
+              <circle cx="89" cy="63" r="4" fill="#111"/><circle cx="90.5" cy="61" r="1.5" fill="#fff"/>
+              <ellipse cx="112" cy="64" rx="7" ry="8" fill="#fff" stroke="#333" stroke-width="1.2"/>
+              <circle cx="113" cy="63" r="4" fill="#111"/><circle cx="114.5" cy="61" r="1.5" fill="#fff"/>
+              <!-- Smile -->
+              <path d="M82 80 Q90 96 100 98 Q110 96 118 80" fill="#d44a3a" stroke="#333" stroke-width="1.5"/>
+              <path d="M85 82 Q92 92 100 94 Q108 92 115 82" fill="#e86050"/>
+              <rect x="92" y="81" width="7" height="6" rx="1" fill="#fff"/>
+              <rect x="102" y="81" width="7" height="6" rx="1" fill="#fff"/>
+              <!-- Nose -->
+              <ellipse cx="100" cy="72" rx="2.5" ry="1.8" fill="#d4a878"/>
+              <!-- Scar -->
+              <path d="M78 68 Q76 72 77 75" fill="none" stroke="#c88868" stroke-width=".8"/>
+              <!-- Red vest -->
+              <path d="M70 96 L64 150 L136 150 L130 96 Z" fill="#d4403a"/>
+              <line x1="100" y1="96" x2="100" y2="150" stroke="#ffc0b0" stroke-width="1.5" opacity=".5"/>
+            </svg>
+          </div>
+          <h3>视频转码去重</h3>
+          <p class="desc">重新编码改变视频内容指纹，生成全新文件指纹，有效应对平台查重机制。</p>
         </div>
+        <div class="card-bottom"><span>蒙奇·D·路飞</span><span class="bounty">悬赏金 8亿贝里</span></div>
+        <button class="card-expand-btn"><span class="arrow-icon">▼</span> 使用教程</button>
+        <div class="card-tutorial"><h5>📖 如何使用</h5><ol><li>点击「选择文件夹」添加视频</li><li>设置输出格式和编码参数</li><li>点击「开始转码」一键处理</li><li>输出文件保存在同级目录</li></ol></div>
       </div>
     </div>
 
@@ -470,11 +579,9 @@ footer .gold { color: var(--gold-dim); }
 
 <!-- ══ Highlights ══ -->
 <section class="section" id="highlights">
-  <div class="section-title reveal">
-    <h2>为什么选择抓马工具</h2><div class="line"></div><p>ONE PIECE EDITION</p>
-  </div>
+  <div class="section-title reveal"><h2>为什么选择抓马工具</h2><div class="line"></div><p>ONE PIECE EDITION</p></div>
   <div class="highlights-grid">
-    <div class="highlight-item reveal"><span class="hl-icon">🏴‍☠️</span><h4>海贼王主题 UI</h4><p>路飞、索隆经典角色画像，沉浸式草帽海贼团视觉体验。</p></div>
+    <div class="highlight-item reveal"><span class="hl-icon">🏴‍☠️</span><h4>海贼王主题 UI</h4><p>路飞、索隆经典角色形象，沉浸式草帽海贼团视觉体验。</p></div>
     <div class="highlight-item reveal"><span class="hl-icon">⚡</span><h4>一键安装</h4><p>双击安装，自动创建桌面快捷方式和开始菜单，无需复杂配置。</p></div>
     <div class="highlight-item reveal"><span class="hl-icon">🔐</span><h4>会员激活系统</h4><p>3 次免费试用，会员码永久激活，一次激活终身使用。</p></div>
     <div class="highlight-item reveal"><span class="hl-icon">🧰</span><h4>5 合 1 工具箱</h4><p>五大视频处理工具集成一体，免去安装多个软件的麻烦。</p></div>
@@ -483,278 +590,76 @@ footer .gold { color: var(--gold-dim); }
 
 <!-- ══ FAQ ══ -->
 <section class="section" id="faq">
-  <div class="section-title reveal">
-    <h2>常 见 问 题</h2><div class="line"></div><p>关于抓马工具的一切，这里都有答案</p>
-  </div>
+  <div class="section-title reveal"><h2>常 见 问 题</h2><div class="line"></div><p>关于抓马工具的一切，这里都有答案</p></div>
   <div class="faq-list">
-    <div class="faq-item reveal">
-      <button class="faq-q">如何激活会员？<span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">软件提供 3 次免费试用。试用用完后，在激活窗口输入会员码 <strong style="color:#e8a820;">128486</strong> 点击「永久激活」即可。</div></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">支持哪些视频格式？<span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">支持 MP4、MOV、AVI、MKV、FLV、WMV 等主流视频格式。推荐使用 MP4 (H.264) 以获得最佳兼容性。</div></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">处理视频会很慢吗？<span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">处理速度取决于视频大小和电脑配置。转码类操作建议使用 NVIDIA 显卡加速（NVENC），速度可提升 3-5 倍。</div></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">是否需要联网使用？<span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">不需要。抓马工具完全本地运行，所有视频处理都在本机完成，不会上传任何文件。</div></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">支持 Windows 哪些版本？<span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">支持 Windows 10 和 Windows 11 64 位系统。不支持 32 位系统和 Windows 7/8。</div></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-q">处理后视频会被覆盖吗？<span class="faq-icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">不会。所有工具都会在输出目录生成新文件，原始视频不会被修改或删除。</div></div>
-    </div>
+    <div class="faq-item reveal"><button class="faq-q">如何激活会员？<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">软件提供 3 次免费试用。试用用完后，在激活窗口输入会员码 <strong style="color:#e8a820;">128486</strong> 点击「永久激活」即可。</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q">支持哪些视频格式？<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">支持 MP4、MOV、AVI、MKV、FLV、WMV 等主流视频格式。推荐使用 MP4 (H.264) 以获得最佳兼容性。</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q">处理视频会很慢吗？<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">处理速度取决于视频大小和电脑配置。转码类操作建议使用 NVIDIA 显卡加速（NVENC），速度可提升 3-5 倍。</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q">是否需要联网使用？<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">不需要。抓马工具完全本地运行，所有视频处理都在本机完成，不会上传任何文件。</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q">支持 Windows 哪些版本？<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">支持 Windows 10 和 Windows 11 64 位系统。不支持 32 位系统和 Windows 7/8。</div></div></div>
+    <div class="faq-item reveal"><button class="faq-q">处理后视频会被覆盖吗？<span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">不会。所有工具都会在输出目录生成新文件，原始视频不会被修改或删除。</div></div></div>
   </div>
 </section>
 
 <!-- ══ Download ══ -->
 <section class="section" id="download">
-  <div class="section-title reveal">
-    <h2>下 载</h2><div class="line"></div><p>SET SAIL — 开启你的视频去重之旅</p>
-  </div>
+  <div class="section-title reveal"><h2>下 载</h2><div class="line"></div><p>SET SAIL — 开启你的视频去重之旅</p></div>
   <div class="download-box reveal">
-    <div class="jolly-roger" style="transform:scale(0.5);margin-bottom:10px;">
-      <div class="skull"></div><div class="jaw"></div>
-      <div class="eye left"></div><div class="eye right"></div>
-      <div class="nose"></div><div class="mouth"></div>
-      <div class="crossbones"><div class="circle c1"></div><div class="circle c2"></div></div>
-    </div>
     <p class="version">抓马工具 v2.0 — 海贼王特别版</p>
     <p class="size-info">文件大小约 65MB · Windows 10/11 · 64位</p>
-    <a href="ZhuamaTool_v2.0.zip" class="btn-download" id="dlBtn" download>
-      <span class="dl-icon">⬇</span> 立即下载
-    </a>
+    <a href="ZhuamaTool_v2.0.zip" class="btn-download" id="dlBtn" download><span class="dl-icon">⬇</span> 立即下载</a>
     <div class="download-progress" id="dlProgress"><div class="bar"></div></div>
-    <div class="requirements">
-      <span>Windows 10/11</span><span>64-bit</span><span>无需安装其他依赖</span><span>3次免费试用</span>
-    </div>
+    <div class="requirements"><span>Windows 10/11</span><span>64-bit</span><span>无需安装其他依赖</span><span>3次免费试用</span></div>
   </div>
 </section>
 
 <!-- ══ Changelog ══ -->
 <section class="section" id="changelog">
-  <div class="section-title reveal">
-    <h2>更 新 日 志</h2><div class="line"></div><p>GRAND LINE LOG — 伟大的航路记录</p>
-  </div>
+  <div class="section-title reveal"><h2>更 新 日 志</h2><div class="line"></div><p>GRAND LINE LOG — 伟大的航路记录</p></div>
   <div class="timeline">
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-version">v2.0 — 2024.12</div>
-      <div class="tl-date">悬赏金 30亿贝里</div>
-      <div class="tl-body">
-        <ul>
-          <li>新增会员激活系统（3次试用 + 激活码）</li>
-          <li>修复滚动和界面显示问题</li>
-          <li>更新至 Python 3.13 兼容</li>
-          <li>网站全面升级至顶配版</li>
-        </ul>
-      </div>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-version">v1.0 — 2024.10</div>
-      <div class="tl-date">悬赏金 15亿贝里</div>
-      <div class="tl-body">
-        <ul>
-          <li>五大视频处理工具集成发布</li>
-          <li>海贼王主题 UI 界面</li>
-          <li>支持视频转码、MD5修改、拼接、截取、导出</li>
-        </ul>
-      </div>
-    </div>
+    <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-version">v2.0 — 2024.12</div><div class="tl-date">悬赏金 30亿贝里</div><div class="tl-body"><ul><li>SVG 动画角色形象全新上线</li><li>新增会员激活系统（3次试用 + 激活码）</li><li>修复滚动和界面显示问题</li><li>网站全面升级至顶配版</li></ul></div></div>
+    <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-version">v1.0 — 2024.10</div><div class="tl-date">悬赏金 15亿贝里</div><div class="tl-body"><ul><li>五大视频处理工具集成发布</li><li>海贼王主题 UI 界面</li><li>支持视频转码、MD5修改、拼接、截取、导出</li></ul></div></div>
   </div>
 </section>
 
-<!-- ══ Footer ══ -->
 <footer>
   <p>© 2024 <span class="gold">抓马工具</span> — ONE PIECE EDITION</p>
   <p style="margin-top:6px;">想要我的财宝吗？那就去找吧！我把一切都放在那里了。</p>
 </footer>
 
 <script>
-/* ═══════════════════════ Stars ═══════════════════════ */
-(function(){
-  const c = document.getElementById('stars');
-  for (let i = 0; i < 80; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.cssText = `
-      left:${Math.random()*100}%;top:${Math.random()*70}%;
-      width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;
-      animation-duration:${Math.random()*3+2}s;animation-delay:${Math.random()*3}s;
-    `;
-    c.appendChild(s);
-  }
-})();
+/* Stars */
+(function(){const c=document.getElementById('stars');for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*70+'%;width:'+(Math.random()*2+1)+'px;height:'+(Math.random()*2+1)+'px;animation-duration:'+(Math.random()*3+2)+'s;animation-delay:'+Math.random()*3+'s;';c.appendChild(s);}})();
 
-/* ═══════════════════════ Nav ═══════════════════════ */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', function(){
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
+/* Nav */
+const nav=document.getElementById('nav');window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);});
+const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',function(){hamburger.classList.toggle('active');navLinks.classList.toggle('open');});
+navLinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hamburger.classList.remove('active');navLinks.classList.remove('open');});});
 
-/* ═══════════════════════ Hamburger ═══════════════════════ */
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-hamburger.addEventListener('click', function(){
-  hamburger.classList.toggle('active');
-  navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click', function(){
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('open');
-  });
-});
+/* Scroll Reveal */
+(function(){const o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');o.unobserve(x.target);}});},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(el){o.observe(el);});})();
 
-/* ═══════════════════════ Scroll Reveal ═══════════════════════ */
-(function(){
-  const obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
-})();
+/* Story Ship */
+(function(){const ship=document.getElementById('storyShip'),story=document.getElementById('story');if(!ship||!story)return;window.addEventListener('scroll',function(){const r=story.getBoundingClientRect(),t=r.top,h=r.height;if(t>window.innerHeight||t<-h){ship.style.opacity='0';return;}ship.style.opacity='1';const pct=Math.max(0,Math.min(1,(-t+window.innerHeight*.2)/(h*.85)));ship.style.top=(pct*100)+'%';});})();
 
-/* ═══════════════════════ Story Ship ═══════════════════════ */
-(function(){
-  const ship = document.getElementById('storyShip');
-  const story = document.getElementById('story');
-  if (!ship || !story) return;
-  window.addEventListener('scroll', function(){
-    const rect = story.getBoundingClientRect();
-    const top = rect.top;
-    const h = rect.height;
-    if (top > window.innerHeight || top < -h) { ship.style.opacity = '0'; return; }
-    ship.style.opacity = '1';
-    const pct = Math.max(0, Math.min(1, (-top + window.innerHeight * 0.2) / (h * 0.85)));
-    ship.style.top = (pct * 100) + '%';
-  });
-})();
+/* 3D Tilt */
+(function(){document.querySelectorAll('[data-tilt]').forEach(function(card){card.addEventListener('mousemove',function(e){const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2,rx=(y-cy)/cy*-8,ry=(x-cx)/cx*8,inner=card.querySelector('.card-inner');if(inner)inner.style.transform='rotateX('+rx+'deg) rotateY('+ry+'deg)';});card.addEventListener('mouseleave',function(){const inner=card.querySelector('.card-inner');if(inner)inner.style.transform='rotateX(0) rotateY(0)';});});})();
 
-/* ═══════════════════════ 3D Card Tilt ═══════════════════════ */
-(function(){
-  document.querySelectorAll('[data-tilt]').forEach(function(card){
-    card.addEventListener('mousemove', function(e){
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const cx = rect.width / 2, cy = rect.height / 2;
-      const rx = (y - cy) / cy * -8;
-      const ry = (x - cx) / cx * 8;
-      const inner = card.querySelector('.card-inner');
-      if (inner) inner.style.transform = 'rotateX('+rx+'deg) rotateY('+ry+'deg)';
-    });
-    card.addEventListener('mouseleave', function(){
-      const inner = card.querySelector('.card-inner');
-      if (inner) inner.style.transform = 'rotateX(0) rotateY(0)';
-    });
-  });
-})();
+/* Mouse Glow */
+(function(){const g=document.getElementById('glow');document.addEventListener('mousemove',function(e){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';g.style.opacity='1';});document.addEventListener('mouseleave',function(){g.style.opacity='0';});})();
 
-/* ═══════════════════════ Mouse Glow ═══════════════════════ */
-(function(){
-  const glow = document.getElementById('glow');
-  document.addEventListener('mousemove', function(e){
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-    glow.style.opacity = '1';
-  });
-  document.addEventListener('mouseleave', function(){ glow.style.opacity = '0'; });
-})();
+/* Tutorial Expand */
+(function(){document.querySelectorAll('.card-expand-btn').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();b.closest('.bounty-card').classList.toggle('expanded');});});})();
 
-/* ═══════════════════════ Card Tutorial Expand ═══════════════════════ */
-(function(){
-  document.querySelectorAll('.card-expand-btn').forEach(function(btn){
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      btn.closest('.bounty-card').classList.toggle('expanded');
-    });
-  });
-})();
+/* FAQ */
+(function(){document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){q.parentElement.classList.toggle('open');});});})();
 
-/* ═══════════════════════ FAQ Accordion ═══════════════════════ */
-(function(){
-  document.querySelectorAll('.faq-q').forEach(function(q){
-    q.addEventListener('click', function(){
-      q.parentElement.classList.toggle('open');
-    });
-  });
-})();
+/* Download Progress */
+(function(){const b=document.getElementById('dlBtn'),bar=document.querySelector('#dlProgress .bar');if(!b||!bar)return;b.addEventListener('click',function(){bar.style.animation='dlProgress 4s ease-in-out forwards';document.getElementById('dlProgress').style.opacity='1';});})();
 
-/* ═══════════════════════ Download Progress ═══════════════════════ */
-(function(){
-  const dlBtn = document.getElementById('dlBtn');
-  const bar = document.querySelector('#dlProgress .bar');
-  if (!dlBtn || !bar) return;
-  dlBtn.addEventListener('click', function(){
-    bar.style.animation = 'dlProgress 4s ease-in-out forwards';
-    document.getElementById('dlProgress').style.opacity = '1';
-  });
-})();
-
-/* ═══════════════════════ Sound Toggle (Web Audio API - Ocean Ambience) ═══════════════════════ */
-(function(){
-  const toggle = document.getElementById('soundToggle');
-  let ctx = null, noiseNode = null, gainNode = null, playing = false;
-
-  function createNoise() {
-    ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const bufferSize = ctx.sampleRate * 2;
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) {
-      data[i] = (Math.random() * 2 - 1) * 0.15;
-    }
-    noiseNode = ctx.createBufferSource();
-    noiseNode.buffer = buffer;
-    noiseNode.loop = true;
-
-    const filter = ctx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 600;
-
-    const filter2 = ctx.createBiquadFilter();
-    filter2.type = 'highpass';
-    filter2.frequency.value = 80;
-
-    gainNode = ctx.createGain();
-    gainNode.gain.value = 0.03;
-
-    noiseNode.connect(filter);
-    filter.connect(filter2);
-    filter2.connect(gainNode);
-    gainNode.connect(ctx.destination);
-    noiseNode.start();
-  }
-
-  function stopNoise() {
-    if (noiseNode) { try { noiseNode.stop(); } catch(e){} noiseNode = null; }
-    if (ctx) { ctx.close(); ctx = null; }
-  }
-
-  toggle.addEventListener('click', function(){
-    if (playing) {
-      stopNoise();
-      toggle.textContent = '🔇';
-      toggle.classList.remove('on');
-      playing = false;
-    } else {
-      createNoise();
-      toggle.textContent = '🔊';
-      toggle.classList.add('on');
-      playing = true;
-    }
-  });
-})();
+/* Sound */
+(function(){const t=document.getElementById('soundToggle');let ctx=null,nn=null,gn=null,playing=false;function create(){ctx=new(window.AudioContext||window.webkitAudioContext)();const bs=ctx.sampleRate*2,bf=ctx.createBuffer(1,bs,ctx.sampleRate),d=bf.getChannelData(0);for(let i=0;i<bs;i++)d[i]=(Math.random()*2-1)*.15;nn=ctx.createBufferSource();nn.buffer=bf;nn.loop=true;const f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=600;const f2=ctx.createBiquadFilter();f2.type='highpass';f2.frequency.value=80;gn=ctx.createGain();gn.gain.value=.03;nn.connect(f);f.connect(f2);f2.connect(gn);gn.connect(ctx.destination);nn.start();}function stop(){if(nn){try{nn.stop();}catch(e){}nn=null;}if(ctx){ctx.close();ctx=null;}}t.addEventListener('click',function(){if(playing){stop();t.textContent='🔇';t.classList.remove('on');playing=false;}else{create();t.textContent='🔊';t.classList.add('on');playing=true;}});})();
 </script>
 </body>
 </html>
