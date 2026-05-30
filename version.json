@@ -1,5 +1,5 @@
-{
-  "version": "3.0",
-  "download": "https://sliu93340-ui.github.io/zhuama-tool/",
-  "note": "新增RPG打怪系统、悬赏商店、路飞五档形态、索隆角色，修复剪映自动导出依赖缺失"
+﻿{
+    "version":  "3.1",
+    "download":  "https://sliu93340-ui.github.io/zhuama-tool/",
+    "note":  "新增RPG打怪系统、悬赏商店、路飞五档形态、索隆角色，修复剪映自动导出依赖缺失"
 }
