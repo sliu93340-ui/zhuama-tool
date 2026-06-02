@@ -1,5 +1,1 @@
-{
-  "version": "3.1",
-  "download": "https://sliu93340-ui.github.io/zhuama-tool/",
-  "note": "修复更新弹窗BUG，优化激活系统"
-}
+{"version": "4.1", "download": "https://sliu93340-ui.github.io/zhuama-tool/", "note": "全新Header单Canvas动画+优化性能+修复卡死"}
