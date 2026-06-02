@@ -1,107 +1,406 @@
 ﻿{
-    "note":  "v4.1 第二代激活码",
     "generated":  "2026-06-02",
     "total":  100,
     "codes":  {
-                  "ZHUAMA-U3J8FWLK":  false,
-                  "ZHUAMA-IF4XPQ97":  false,
-                  "ZHUAMA-Q51Y8B29":  false,
-                  "ZHUAMA-SQAHB1J9":  false,
-                  "ZHUAMA-9JR4L25E":  false,
-                  "ZHUAMA-YIH1SP6K":  false,
-                  "ZHUAMA-8VEK947B":  false,
-                  "ZHUAMA-5081JLZA":  false,
-                  "ZHUAMA-O9D0R6VE":  false,
-                  "ZHUAMA-FM7K2GSA":  false,
-                  "ZHUAMA-COD19NR6":  false,
-                  "ZHUAMA-C3U5RWTD":  false,
-                  "ZHUAMA-K40CQH5A":  false,
-                  "ZHUAMA-W8FNLD6J":  false,
-                  "ZHUAMA-E3B1W25A":  false,
-                  "ZHUAMA-8JGR9YB0":  false,
-                  "ZHUAMA-LKEFG7DO":  false,
-                  "ZHUAMA-RLZ7V4KN":  false,
-                  "ZHUAMA-XTAPWVY4":  false,
-                  "ZHUAMA-OFV9J8LK":  false,
-                  "ZHUAMA-UFYEXWQR":  false,
-                  "ZHUAMA-MX4ZT9H1":  false,
-                  "ZHUAMA-9O7FUZ6V":  false,
-                  "ZHUAMA-QFAD8TK9":  false,
-                  "ZHUAMA-CUSKIL85":  false,
-                  "ZHUAMA-A7MRBH4Z":  false,
-                  "ZHUAMA-ZDUCJYQ4":  false,
-                  "ZHUAMA-47B2FOJ5":  false,
-                  "ZHUAMA-6UF9O213":  false,
-                  "ZHUAMA-7D1ZUEFR":  false,
-                  "ZHUAMA-6VUGCL7D":  false,
-                  "ZHUAMA-6TUGBMO8":  false,
-                  "ZHUAMA-OS9X0M6U":  false,
-                  "ZHUAMA-81ISUK2W":  false,
-                  "ZHUAMA-KOD0JSAW":  false,
-                  "ZHUAMA-47M820YS":  false,
-                  "ZHUAMA-9QSC68UL":  false,
-                  "ZHUAMA-2EUF53JB":  false,
-                  "ZHUAMA-EO5P6XT0":  false,
-                  "ZHUAMA-E9HCLN3R":  false,
-                  "ZHUAMA-0GR1XNP4":  false,
-                  "ZHUAMA-WPT8CH94":  false,
-                  "ZHUAMA-VFPIWJY5":  false,
-                  "ZHUAMA-CFEUSOT5":  false,
-                  "ZHUAMA-19JZN6HI":  false,
-                  "ZHUAMA-TZRX6IAE":  false,
-                  "ZHUAMA-Q97X3M0Y":  false,
-                  "ZHUAMA-BR1JGFML":  false,
-                  "ZHUAMA-1TVPCUGI":  false,
-                  "ZHUAMA-YT3A9O62":  false,
-                  "ZHUAMA-TBLJO94C":  false,
-                  "ZHUAMA-S54VULJP":  false,
-                  "ZHUAMA-2XGZNFJS":  false,
-                  "ZHUAMA-SDEH0AV5":  false,
-                  "ZHUAMA-T7DQ1VG6":  false,
-                  "ZHUAMA-7S8P52NH":  false,
-                  "ZHUAMA-ST4G12DN":  false,
-                  "ZHUAMA-HKMZOLXV":  false,
-                  "ZHUAMA-F1R28UJX":  false,
-                  "ZHUAMA-FP5W6XYD":  false,
-                  "ZHUAMA-JY6DFL9K":  false,
-                  "ZHUAMA-H3XRG176":  false,
-                  "ZHUAMA-HL3F4Z07":  false,
-                  "ZHUAMA-CX3JAKMO":  false,
-                  "ZHUAMA-1DTEL4XG":  false,
-                  "ZHUAMA-HRT6QVM0":  false,
-                  "ZHUAMA-MLO6SJBV":  false,
-                  "ZHUAMA-IPE8651A":  false,
-                  "ZHUAMA-Q4RYKMNV":  false,
-                  "ZHUAMA-26T8PVJ7":  false,
-                  "ZHUAMA-5VQ9JU0M":  false,
-                  "ZHUAMA-ATSW8H1E":  false,
-                  "ZHUAMA-E73C2MOU":  false,
-                  "ZHUAMA-KC4WYIE7":  false,
-                  "ZHUAMA-4GQHNIL9":  false,
-                  "ZHUAMA-BA5Z0TO9":  false,
-                  "ZHUAMA-9ZR6GAN5":  false,
-                  "ZHUAMA-5BXITGEV":  false,
-                  "ZHUAMA-63AIEPOL":  false,
-                  "ZHUAMA-PXMI4AHY":  false,
-                  "ZHUAMA-X58K20NW":  false,
-                  "ZHUAMA-NVF41TWH":  false,
-                  "ZHUAMA-NX71PLFG":  false,
-                  "ZHUAMA-NAI3B18J":  false,
-                  "ZHUAMA-PQZ47JNI":  false,
-                  "ZHUAMA-IB7XJ3EH":  false,
-                  "ZHUAMA-L9AQIJU0":  false,
-                  "ZHUAMA-8ON23XIT":  false,
-                  "ZHUAMA-NMY0L2Q8":  false,
-                  "ZHUAMA-YZAOIHUX":  false,
-                  "ZHUAMA-JX5DVMLB":  false,
-                  "ZHUAMA-LWY8QK9E":  false,
-                  "ZHUAMA-6INMHJBC":  false,
-                  "ZHUAMA-2YZTOUQ9":  false,
-                  "ZHUAMA-XYHT6K8M":  false,
-                  "ZHUAMA-G7UMZ0E4":  false,
-                  "ZHUAMA-OKJX25SV":  false,
-                  "ZHUAMA-ME7NCQRH":  false,
-                  "ZHUAMA-Q7E2OC5R":  false,
-                  "ZHUAMA-JXVHB2MO":  false
+                  "ZHUAMA-1ZGRX7IH":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-JDAK7EGY":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-NKPMUI5Y":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-0RX24D5M":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-D7CL4NQ3":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-KTG10ERB":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-YPO5GDKV":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-01E9CWP5":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-LDXKI30C":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-94JMI0EK":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-0MGCHEPD":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-91WQ0R7S":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-Z7HWI2RA":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-2G86C7V5":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-EH83RWXK":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-EF9KB87J":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-CTBPS7RE":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-AXKY94DN":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-EHQXML8U":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-HIV4ECZU":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-U1BT38LE":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-MYLGOEV8":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-P1JOXTVI":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-B8UIAHS3":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-Z6CDYP13":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-9DAN3RS7":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-PR8ZGUT5":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-TUGR0AEQ":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-VOWUZIEM":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-I283FGL5":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-4G3KZLJ9":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-D1QR2A3J":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-HMUR6NK7":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-07XSZPLU":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-G50OVLFW":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-BEGTSN05":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-UPBFVJHA":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-WRGFEY0T":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-7GHJTRMQ":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-UZ8WBYAT":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-TPZNI471":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-8X9V7CED":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-VU0J6L23":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-E7L6490U":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-X910YTCM":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-8OBQG1C0":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-A70EJQSU":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-H175NEL0":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-C4KVRDTW":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-Q7OSRAUP":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-SJKAHU7Q":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-CB2695R8":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-ET8FRQZH":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-7GOUWARZ":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-TL5X6RHK":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-6VS57X0T":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-6G8KAHEI":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-03IVO4P7":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-FUNPQHSG":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-UYET0VOR":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-4DTOI2S9":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-ZI1YVS8C":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-Z726LBC9":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-HYOZCIF9":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-BZITFC7V":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-7LQC52PI":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-MN40IQJO":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-C87USTRZ":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-D2CPLQGB":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-MFRO6H32":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-ZVOMTNDB":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-E0CWJ9DZ":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-L10UHWTS":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-IX561AZJ":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-QYH085L6":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-Q3NAZKO1":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-8TO2QUJI":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-CB6IDYX3":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-JOTYHLZ5":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-LCDK129T":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-SX743IOF":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-X0WHJAQ1":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-1YLMKBV7":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-Y02M9IVR":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-DNL20S6Y":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-5YV2TQOP":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-1XSG3M9R":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-4FLG3COK":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-DR1I804L":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-FHJ0WVAQ":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-5YO3QTBS":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-JRH4F7V8":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-T0MAF517":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-3GEQC590":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-RCE13WVL":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-AYTR3HNC":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-W1EGKNOI":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-EZRTBC3J":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-R7MJHF63":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      },
+                  "ZHUAMA-893YX4UO":  {
+                                          "used":  false,
+                                          "time":  ""
+                                      }
               }
 }
